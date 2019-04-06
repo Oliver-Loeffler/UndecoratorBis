@@ -32,6 +32,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import insidefx.undecorator.Theme.ThemeProperty;
 import insidefx.undecorator.classic.ClassicTheme;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;

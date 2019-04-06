@@ -1,4 +1,4 @@
-package skin.touch;
+package insidefx.undecorator.touch;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,7 +9,8 @@ import java.util.Properties;
 import org.junit.jupiter.api.Test;
 
 import insidefx.undecorator.Theme;
-import insidefx.undecorator.ThemeProperty;
+import insidefx.undecorator.Theme.ThemeProperty;
+import insidefx.undecorator.touch.TouchTheme;
 
 class TouchThemeTest {
 
