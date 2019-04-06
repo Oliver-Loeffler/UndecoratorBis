@@ -1,13 +1,6 @@
 apply from: rootProject.file('gradle/publishing.gradle')
 apply from: rootProject.file('gradle/code-quality.gradle')
 
-task sourcesJar(type: Jar) {
-    group 'Build'
-    description 'An archive of the source code'
-    classifier 'sources'    
-    from sourceSets.main.allSource
-}
-
 sourceSets {
     main {
         java {
@@ -20,6 +13,12 @@ sourceSets {
         }
     }
 }
+
+	
+test {
+    useJUnitPlatform()
+}
+
 
 javadoc {
     excludes = ['**/*.html', 'META-INF/**']
@@ -35,12 +34,6 @@ javadoc {
                            'http://docs.oracle.com/javase/8/javafx/api/']
 }
 
-task javadocJar(type: Jar) {
-    group 'Build'
-    description 'An archive of the javadoc'
-    classifier 'javadoc'
-    from javadoc.destinationDir
-}
 
 // execute jar tasks
 jar.finalizedBy sourcesJar

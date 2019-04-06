@@ -15,5 +15,10 @@ class UndecoratorTest {
 		assertNotNull(bundle);
 		
 	}
+	
+	@Test
+	void shallFail() {
+		fail("WithIntent!");
+	}
 
 }
