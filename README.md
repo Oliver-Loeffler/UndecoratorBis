@@ -5,9 +5,9 @@ In 2014 Arnaud Nouard created a newer version of his JavaFX window decoration AP
 
 As I really like the chosen approach and the API is released with a BSD-2-Clause license, I will try to continue development. The first steps are:
 
- * update the Gradle build to work with Gradle 5.2.1 or newer
- * enable Gradle Wrapper
- * Publish version 0.1.0 on https://search.maven.org
+ * update the Gradle build to work with Gradle 5.2.1 or newer :+1:
+ * enable Gradle Wrapper :+1:
+ * Publish version 0.1.0 on https://search.maven.org :+1:
  * Add a new theme called WXflat when completed (utility stage is not finalized yet)
  * Introduce concept of themes.
  * Make the project work with Java 11 and JavaFX 11
@@ -17,6 +17,9 @@ Well, he would like to see more screenshots of apps built using UndecoratorBis, 
 The reason why I'd like to publish this one on https://search.maven.org is, that the environment where I'd like to use the Undecorator, does not (yet) support other repositories than search.maven.org.  
 
 ## License
+
+Copyright (c) 2014, in-sideFX
+All rights reserved.
 
 BSD License All rights reserved.
 
