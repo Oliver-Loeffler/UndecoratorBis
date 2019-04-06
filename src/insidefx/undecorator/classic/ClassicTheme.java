@@ -1,4 +1,4 @@
-package skin.classic;
+package insidefx.undecorator.classic;
 
 import insidefx.undecorator.Theme;
 

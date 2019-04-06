@@ -1,4 +1,4 @@
-package skin.classic;
+package insidefx.undecorator.classic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import insidefx.undecorator.Theme;
 import insidefx.undecorator.ThemeProperty;
+import insidefx.undecorator.classic.ClassicTheme;
 
 class ClassicThemeTest {
 	
