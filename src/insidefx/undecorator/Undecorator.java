@@ -939,7 +939,7 @@ public class Undecorator extends StackPane {
             SHADOW_WIDTH = Integer.parseInt(prop.getProperty("window-shadow-width"));
             RESIZE_PADDING = Integer.parseInt(prop.getProperty("window-resize-padding"));
         } catch (IOException ex) {
-            LOGGER.log(Level.SEVERE, "Error while loading confguration flie", ex);
+            LOGGER.log(Level.SEVERE, "Error while loading confguration file", ex);
         }
         LOC = ResourceBundle.getBundle("insidefx/undecorator/resources/localization", Locale.getDefault());
 
