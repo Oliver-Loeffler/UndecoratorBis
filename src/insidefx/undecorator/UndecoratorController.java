@@ -26,7 +26,10 @@
  */
 package insidefx.undecorator;
 
+import java.util.Objects;
 import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -61,6 +64,7 @@ public class UndecoratorController {
     Undecorator undecorator;
     BoundingBox savedBounds, savedFullScreenBounds;
     boolean maximized = false;
+    private final Logger logger;
     static boolean isMacOS = false;
     static final int MAXIMIZE_BORDER = 20;  // Allow double click to maximize on top of the Scene
 
@@ -71,8 +75,9 @@ public class UndecoratorController {
         }
     }
 
-    public UndecoratorController(Undecorator ud) {
-        undecorator = ud;
+    public UndecoratorController(Undecorator undecorator) {
+        this.undecorator = Objects.requireNonNull(undecorator, "undecorator must not be null");
+        this.logger = Logger.getLogger(UndecoratorController.class.getName());
     }
 
 
@@ -140,33 +145,17 @@ public class UndecoratorController {
 
     public void close() {
         final Stage stage = undecorator.getStage();
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
-            }
-        });
-
+        Platform.runLater(()->stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST)));
     }
 
     public void minimize() {
-
-        if (!Platform.isFxApplicationThread()) // Ensure on correct thread else hangs X under Unbuntu
-        {
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    _minimize();
-                }
-            });
+    	// Ensure on correct thread else hangs X under Unbuntu
+    	Runnable minimize = ()->undecorator.getStage().setIconified(true);
+        if (!Platform.isFxApplicationThread()) {
+            Platform.runLater(minimize);
         } else {
-            _minimize();
+            minimize.run();
         }
-    }
-
-    private void _minimize() {
-        Stage stage = undecorator.getStage();
-        stage.setIconified(true);
     }
 
     /**
@@ -339,7 +328,7 @@ public class UndecoratorController {
                 }
             }
         } catch (Exception e) {
-            Undecorator.LOGGER.log(Level.SEVERE, "setStageY issue", e);
+            logger.log(Level.SEVERE, "setStageY issue", e);
         }
     }
 

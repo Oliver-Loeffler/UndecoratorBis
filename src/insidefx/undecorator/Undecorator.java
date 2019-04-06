@@ -28,6 +28,7 @@ package insidefx.undecorator;
 
 import java.net.URL;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -83,14 +84,16 @@ import javafx.util.Duration;
  */
 public class Undecorator extends StackPane {
 
-    public int shadowWidth = 15;
-    public int savedShadowWidth = 15;
+	private int shadowWidth = 15;
+    private int savedShadowWidth = 15;
     
-    static public int RESIZE_PADDING = 7;
-    static public int FEEDBACK_STROKE = 4;
-    static public double ROUNDED_DELTA = 5;
+    private int resizePadding = 7;
     
-    public static final Logger LOGGER = Logger.getLogger("Undecorator");
+    // private int feedbackStroke = 4;
+    
+    private double roundedDelta = 5;
+    
+    private final Logger logger;
 
     public static ResourceBundle LOC;
     
@@ -122,10 +125,12 @@ public class Undecorator extends StackPane {
     
     @FXML
     private ContextMenu contextMenu;
+   
     private final MenuItem maximizeMenuItem;
     private final CheckMenuItem fullScreenMenuItem;
     
-    private Region clientArea;
+    private final Region clientArea;
+    
     private Pane stageDecoration = null;
     private Rectangle shadowRectangle;
     private Pane glassPane;
@@ -135,9 +140,9 @@ public class Undecorator extends StackPane {
     private Effect dsFocused;
     private Effect dsNotFocused;
     private UndecoratorController undecoratorController;
-    private Stage stage;
     private Rectangle backgroundRect;
     
+    private final Stage stage;
     private final SimpleBooleanProperty maximizeProperty;
     private final SimpleBooleanProperty minimizeProperty;
     private final SimpleBooleanProperty closeProperty;
@@ -173,9 +178,12 @@ public class Undecorator extends StackPane {
         this(stage, root, new ClassicTheme(), StageStyle.UNDECORATED);
     }
 
-    public Undecorator(Stage stag, Region clientArea, Theme theme, StageStyle st) {
-    	
-    	this.stageStyle = st;
+    public Undecorator(Stage stage, Region clientArea, Theme theme, StageStyle stageStyle) {
+    	this.stageStyle = Objects.requireNonNull(stageStyle, "stageStyle must not be null");
+    	this.stage = Objects.requireNonNull(stage, "stage must not be null");
+    	this.clientArea = Objects.requireNonNull(clientArea, "client area must not be null");
+    	    	
+    	this.logger = Logger.getLogger(Undecorator.class.getName());
     	
     	this.maximizeProperty = new SimpleBooleanProperty(false);
     	this.minimizeProperty = new SimpleBooleanProperty(false);
@@ -186,13 +194,10 @@ public class Undecorator extends StackPane {
     	this.fullScreenMenuItem = new CheckMenuItem("FullScreen");
     	
     	loadConfig(theme);
-        create(stag, clientArea, theme);
+        decorateWith(theme);
     }
 
-    public void create(Stage stag, Region clientArea, Theme theme) {
-        this.stage = stag;
-        this.clientArea = clientArea;
-        
+    protected void decorateWith(Theme theme) {       
         maximizeProperty.addListener((o,a,b)->getController().maximizeOrRestore());
 		minimizeProperty.addListener((o,a,b)->getController().minimize());
 		closeProperty.addListener((o,a,b)->getController().close());
@@ -205,7 +210,7 @@ public class Undecorator extends StackPane {
         loadTheme(theme);
         initDecoration();
 
-        undecoratorController.setStageResizableWith(stage, decorationRoot, RESIZE_PADDING, shadowWidth);
+        undecoratorController.setStageResizableWith(stage, decorationRoot, resizePadding, shadowWidth);
 
         // If not resizable (quick fix)
         if (fullscreen
@@ -413,7 +418,7 @@ public class Undecorator extends StackPane {
     		message.append("CSS: ");
     		message.append(String.valueOf(css));
     		
-    		LOGGER.log(Level.SEVERE, message.toString(), error);
+    		logger.log(Level.SEVERE, message.toString(), error);
     	}
     }
 
@@ -463,19 +468,19 @@ public class Undecorator extends StackPane {
 
     @Override
     protected double computePrefWidth(double d) {
-        return clientArea.getPrefWidth() + shadowWidth * 2 + RESIZE_PADDING * 2;
+        return clientArea.getPrefWidth() + shadowWidth * 2 + resizePadding * 2;
     }
 
     @Override
     protected double computePrefHeight(double d) {
-        return clientArea.getPrefHeight() + shadowWidth * 2 + RESIZE_PADDING * 2;
+        return clientArea.getPrefHeight() + shadowWidth * 2 + resizePadding * 2;
     }
 
     @Override
     protected double computeMaxHeight(double d) {
         double maxHeight = clientArea.getMaxHeight();
         if (maxHeight > 0) {
-            return maxHeight + shadowWidth * 2 + RESIZE_PADDING * 2;
+            return maxHeight + shadowWidth * 2 + resizePadding * 2;
         }
         return maxHeight;
     }
@@ -483,7 +488,7 @@ public class Undecorator extends StackPane {
     @Override
     protected double computeMinHeight(double d) {
         double d2 = super.computeMinHeight(d);
-        d2 += shadowWidth * 2 + RESIZE_PADDING * 2;
+        d2 += shadowWidth * 2 + resizePadding * 2;
         return d2;
     }
 
@@ -491,7 +496,7 @@ public class Undecorator extends StackPane {
     protected double computeMaxWidth(double d) {
         double maxWidth = clientArea.getMaxWidth();
         if (maxWidth > 0) {
-            return maxWidth + shadowWidth * 2 + RESIZE_PADDING * 2;
+            return maxWidth + shadowWidth * 2 + resizePadding * 2;
         }
         return maxWidth;
     }
@@ -499,7 +504,7 @@ public class Undecorator extends StackPane {
     @Override
     protected double computeMinWidth(double d) {
         double d2 = super.computeMinWidth(d);
-        d2 += shadowWidth * 2 + RESIZE_PADDING * 2;
+        d2 += shadowWidth * 2 + resizePadding * 2;
         return d2;
     }
 
@@ -731,7 +736,7 @@ public class Undecorator extends StackPane {
         double h = b.getHeight();
         ObservableList<Node> list = super.getChildren();
 //        ROUNDED_DELTA=shadowRectangle.getArcWidth()/4;
-        ROUNDED_DELTA = 0;
+        roundedDelta = 0;
         for (Node node : list) {
             if (node == shadowRectangle) {
                 shadowRectangle.setWidth(w - shadowWidth * 2);
@@ -744,9 +749,9 @@ public class Undecorator extends StackPane {
                 backgroundRect.setX(shadowWidth);
                 backgroundRect.setY(shadowWidth);
             } else if (node == stageDecoration) {
-                stageDecoration.resize(w - shadowWidth * 2 - ROUNDED_DELTA * 2, h - shadowWidth * 2 - ROUNDED_DELTA * 2);
-                stageDecoration.setLayoutX(shadowWidth + ROUNDED_DELTA);
-                stageDecoration.setLayoutY(shadowWidth + ROUNDED_DELTA);
+                stageDecoration.resize(w - shadowWidth * 2 - roundedDelta * 2, h - shadowWidth * 2 - roundedDelta * 2);
+                stageDecoration.setLayoutX(shadowWidth + roundedDelta);
+                stageDecoration.setLayoutY(shadowWidth + roundedDelta);
             } //            else if (node == resizeRect) {
             //                resizeRect.setWidth(w - SHADOW_WIDTH * 2);
             //                resizeRect.setHeight(h - SHADOW_WIDTH * 2);
@@ -754,9 +759,9 @@ public class Undecorator extends StackPane {
             //                resizeRect.setLayoutY(SHADOW_WIDTH);
             //            } 
             else {
-                node.resize(w - shadowWidth * 2 - ROUNDED_DELTA * 2, h - shadowWidth * 2 - ROUNDED_DELTA * 2);
-                node.setLayoutX(shadowWidth + ROUNDED_DELTA);
-                node.setLayoutY(shadowWidth + ROUNDED_DELTA);
+                node.resize(w - shadowWidth * 2 - roundedDelta * 2, h - shadowWidth * 2 - roundedDelta * 2);
+                node.setLayoutX(shadowWidth + roundedDelta);
+                node.setLayoutY(shadowWidth + roundedDelta);
 //                node.resize(w - SHADOW_WIDTH * 2 - RESIZE_PADDING * 2, h - SHADOW_WIDTH * 2 - RESIZE_PADDING * 2);
 //                node.setLayoutX(SHADOW_WIDTH + RESIZE_PADDING);
 //                node.setLayoutY(SHADOW_WIDTH + RESIZE_PADDING);
@@ -765,7 +770,7 @@ public class Undecorator extends StackPane {
     }
 
     public int getShadowBorderSize() {
-        return shadowWidth * 2 + RESIZE_PADDING * 2;
+        return shadowWidth * 2 + resizePadding * 2;
     }
 
     public UndecoratorController getController() {
@@ -866,14 +871,15 @@ public class Undecorator extends StackPane {
     void loadConfig(Theme theme) {
         
     	theme.tryLoadingProperties();
+    	
     	shadowWidth = theme.getProperty(ThemeProperty.WINDOW_SHADOW_WIDTH, 15);
-    	RESIZE_PADDING = theme.getProperty(ThemeProperty.WINDOW_RESIZE_PADDING, 7);
+    	resizePadding = theme.getProperty(ThemeProperty.WINDOW_RESIZE_PADDING, 7);
     	
     	LOC = loadResourceBundle("localization");
 
     }
 
-	private ResourceBundle loadResourceBundle(String bundleName) {
+	protected static final ResourceBundle loadResourceBundle(String bundleName) {
         return ResourceBundle.getBundle(
         		(Undecorator.class.getPackage().getName()+"."+bundleName).replace('.', '/'), 
         		Locale.getDefault());
