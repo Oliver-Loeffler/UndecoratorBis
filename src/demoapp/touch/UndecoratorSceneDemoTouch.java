@@ -6,6 +6,8 @@ package demoapp.touch;
 
 import insidefx.undecorator.Undecorator;
 import insidefx.undecorator.UndecoratorScene;
+import insidefx.undecorator.touch.TouchTheme;
+
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
@@ -50,7 +52,7 @@ public class UndecoratorSceneDemoTouch extends Application {
         Region root = (Region) fxmlLoader.load();
 
         // The Undecorator as a Scene
-        final UndecoratorScene undecoratorScene = new UndecoratorScene(primaryStage, root);
+        final UndecoratorScene undecoratorScene = new UndecoratorScene(primaryStage, root, new TouchTheme());
         // Overrides defaults
         undecoratorScene.addStylesheet("demoapp/touch/demoapp.css");
         // Enable fade transition

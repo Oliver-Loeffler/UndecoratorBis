@@ -221,7 +221,7 @@ public class UndecoratorController {
                 }
                 if (maximized) {
                     // Remove maximized state
-                    undecorator.maximizeProperty.set(false);
+                    undecorator.maximizeProperty().set(false);
                     return;
                 } // Docked then moved, so restore state
                 else if (savedBounds != null) {
@@ -411,7 +411,7 @@ public class UndecoratorController {
                 }
                 if (maximized) {
                     // Remove Maximized state
-                    undecorator.maximizeProperty.set(false);
+                	undecorator.maximizeProperty().set(false);
                     // Center 
                     stage.setX(mouseEvent.getScreenX() - stage.getWidth() / 2);
                     stage.setY(mouseEvent.getScreenY() - SHADOW_WIDTH);
@@ -620,7 +620,7 @@ public class UndecoratorController {
             stage.setHeight(height);
             undecorator.setShadow(false);
         } else if (mouseEvent.getScreenY() <= visualBounds.getMinY()) { // Mac menu bar
-            undecorator.maximizeProperty.set(true);
+        	undecorator.maximizeProperty().set(true);
         }
 
     }

@@ -10,7 +10,7 @@ import java.util.Properties;
 import org.junit.jupiter.api.Test;
 
 import insidefx.undecorator.Theme;
-import insidefx.undecorator.ThemeProperty;
+import insidefx.undecorator.Theme.ThemeProperty;
 import insidefx.undecorator.classic.ClassicTheme;
 
 class ClassicThemeTest {
