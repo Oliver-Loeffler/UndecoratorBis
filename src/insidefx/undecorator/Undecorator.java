@@ -125,6 +125,9 @@ public class Undecorator extends StackPane {
     
     @FXML
     private ContextMenu contextMenu;
+    
+    @FXML
+	private Pane titleanchor;
    
     private final MenuItem maximizeMenuItem;
     private final CheckMenuItem fullScreenMenuItem;
@@ -204,14 +207,15 @@ public class Undecorator extends StackPane {
 		fullscreenProperty.addListener((o,a,b)->getController().setFullScreen(!stage.isFullScreen()));
 
         undecoratorController = new UndecoratorController(this);
-        undecoratorController.setAsStageDraggable(stage, clientArea);
-
+        
         installDropShadow();       
         loadTheme(theme);
         initDecoration();
 
         undecoratorController.setStageResizableWith(stage, decorationRoot, resizePadding, shadowWidth);
-
+        undecoratorController.setAsStageDraggable(stage, clientArea);
+        undecoratorController.setAsStageDraggable(stage, titleanchor);
+        
         // If not resizable (quick fix)
         if (fullscreen
                 != null) {

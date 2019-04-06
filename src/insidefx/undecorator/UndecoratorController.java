@@ -358,21 +358,15 @@ public class UndecoratorController {
      */
     public void setAsStageDraggable(final Stage stage, final Node node) {
 
-        node.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            // Maximize on double click
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        node.setOnMouseClicked(mouseEvent -> {
                 if (undecorator.getStageStyle() != StageStyle.UTILITY && !stage.isFullScreen() && stage.isResizable() && mouseEvent.getClickCount() > 1) {
                     if (mouseEvent.getSceneY() - SHADOW_WIDTH < MAXIMIZE_BORDER) {
                         undecorator.maximizeProperty().set(!undecorator.maximizeProperty().get());
                         mouseEvent.consume();
                     }
-                }
-            }
-        });
-        node.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+                }});
+        
+        node.setOnMousePressed(mouseEvent -> {
                 if (mouseEvent.isPrimaryButtonDown()) {
                     initX = mouseEvent.getScreenX();
                     initY = mouseEvent.getScreenY();
@@ -380,12 +374,9 @@ public class UndecoratorController {
                 } else {
                     initX = -1;
                     initY = -1;
-                }
-            }
-        });
-        node.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+                }});
+        
+        node.setOnMouseDragged(mouseEvent -> {
                 if (!mouseEvent.isPrimaryButtonDown() || initX == -1) {
                     return;
                 }
@@ -440,27 +431,19 @@ public class UndecoratorController {
 ////                undecorator.getBackgroundRectangle().setEffect(new BoxBlur());
 //                undecorator.getBackgroundRectangle().setFill(imagePattern);
                 ////////////////
-            }
-        });
-        node.setOnMouseReleased(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent t) {
+            });
+        
+        node.setOnMouseReleased(mouseEvent ->  {
                 if (stage.isResizable()) {
                     undecorator.setDockFeedbackInvisible();
                     setCursor(node, Cursor.DEFAULT);
                     initX = -1;
                     initY = -1;
-                    dockActions(stage, t);
+                    dockActions(stage, mouseEvent);
                 }
-            }
-        });
+            });
 
-        node.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                //setCursor(node, Cursor.DEFAULT);
-            }
-        });
+        node.setOnMouseExited(mouseEvent -> { /*setCursor(node, Cursor.DEFAULT);*/ });
 
     }
 
