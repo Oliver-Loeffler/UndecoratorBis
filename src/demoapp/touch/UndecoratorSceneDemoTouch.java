@@ -109,7 +109,7 @@ public class UndecoratorSceneDemoTouch extends Application {
         Region root = (Region) fxmlLoader.load();
         Stage utilityStage = new Stage();
         utilityStage.setTitle("Stage Utility type demo");
-        UndecoratorScene scene = new UndecoratorScene(utilityStage, StageStyle.UTILITY, root, null);
+        UndecoratorScene scene = new UndecoratorScene(utilityStage, root, StageStyle.UTILITY);
         // Overrides defaults
         scene.addStylesheet("demoapp/touch/demoapp.css");
 

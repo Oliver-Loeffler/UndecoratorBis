@@ -26,6 +26,8 @@
  */
 package insidefx.undecorator;
 
+import java.util.Objects;
+
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
@@ -33,6 +35,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import skin.classic.ClassicTheme;
 
 /**
  *
@@ -40,30 +43,8 @@ import javafx.stage.StageStyle;
  */
 public class UndecoratorScene extends Scene {
 
-    static public final String DEFAULT_STYLESHEET = "skin/undecorator.css";
-    static public final String DEFAULT_STYLESHEET_UTILITY = "skin/undecoratorUtilityStage.css";
-    static public final String DEFAULT_STAGEDECORATION = "stagedecoration.fxml";
-    static public final String DEFAULT_STAGEDECORATION_UTILITY = "stageUtilityDecoration.fxml";
-
-    static public final String DEFAULT_STYLESHEET_TOUCH = "skin/Touch/undecorator.css";
-    static public final String DEFAULT_STYLESHEET_UTILITY_TOUCH = "skin/Touch/undecoratorUtilityStage.css";
-    static public final String DEFAULT_STAGEDECORATION_TOUCH = "stagedecorationTouch.fxml";
-    static public final String DEFAULT_STAGEDECORATION_UTILITY_TOUCH = "stageUtilityDecorationTouch.fxml";
-
-    static public String STYLESHEET = DEFAULT_STYLESHEET_TOUCH;
-    static public String STYLESHEET_UTILITY = DEFAULT_STYLESHEET_UTILITY_TOUCH;
-    static public String STAGEDECORATION = DEFAULT_STAGEDECORATION_TOUCH;
-    static public String STAGEDECORATION_UTILITY = DEFAULT_STAGEDECORATION_UTILITY_TOUCH;
-
     Undecorator undecorator;
-
-    static public void setClassicDecoration() {
-        UndecoratorScene.STAGEDECORATION = UndecoratorScene.DEFAULT_STAGEDECORATION;
-        UndecoratorScene.STAGEDECORATION_UTILITY = UndecoratorScene.DEFAULT_STAGEDECORATION_UTILITY;
-        UndecoratorScene.STYLESHEET = UndecoratorScene.DEFAULT_STYLESHEET;
-        UndecoratorScene.STYLESHEET_UTILITY = UndecoratorScene.DEFAULT_STYLESHEET_UTILITY;
-    }
-
+       
     /**
      * Basic constructor with built-in behavior
      *
@@ -71,40 +52,41 @@ public class UndecoratorScene extends Scene {
      * @param root your UI to be displayed in the Stage
      */
     public UndecoratorScene(Stage stage, Region root) {
-        this(stage, StageStyle.TRANSPARENT, root, STAGEDECORATION);
+        this(stage, root, StageStyle.TRANSPARENT, new ClassicTheme());
     }
-
+    
+    public UndecoratorScene(Stage stage, Region root, StageStyle stageStyle) {
+        this(stage, root, stageStyle, new ClassicTheme());
+    }
+    
+    /**
+     * Constructor which allows adding a custom theme.
+     *
+     * @param stage The main stage
+     * @param root your UI to be displayed in the Stage
+     * @param theme Custom theme to be added
+     */
+    public UndecoratorScene(Stage stage, Region root, Theme theme) {
+        this(stage, root, StageStyle.TRANSPARENT, theme);
+    }
+    
     /**
      * UndecoratorScene constructor
      *
      * @param stage The main stage
-     * @param stageStyle could be StageStyle.UTILITY or StageStyle.TRANSPARENT
      * @param root your UI to be displayed in the Stage
-     * @param stageDecorationFxml Your own Stage decoration or null to use the built-in one
+     * @param stageStyle could be StageStyle.UTILITY or StageStyle.TRANSPARENT
+     * @param theme Your own Stage decoration theme or null to use the built-in one
      */
-    public UndecoratorScene(Stage stage, StageStyle stageStyle, Region root, String stageDecorationFxml) {
+    public UndecoratorScene(Stage stage, Region root, StageStyle stageStyle, Theme theme) {
+    	super(root);
 
-        super(root);
-
-        /*
-         * Fxml
-         */
-        if (stageDecorationFxml == null) {
-            if (stageStyle == StageStyle.UTILITY) {
-                stageDecorationFxml = STAGEDECORATION_UTILITY;
-            } else {
-                stageDecorationFxml = STAGEDECORATION;
-            }
-        }
-        undecorator = new Undecorator(stage, root, stageDecorationFxml, stageStyle);
+    	Objects.requireNonNull(stageStyle, "stageStyle must not be null");
+        Objects.requireNonNull(theme, "theme must not be null");
+        Objects.requireNonNull(stage, "stage must not be null");
+        
+        this.undecorator = new Undecorator(stage, root, theme, stageStyle);        
         super.setRoot(undecorator);
-
-        // Customize it by CSS if needed:
-        if (stageStyle == StageStyle.UTILITY) {
-            undecorator.getStylesheets().add(STYLESHEET_UTILITY);
-        } else {
-            undecorator.getStylesheets().add(STYLESHEET);
-        }
 
         // Transparent scene and stage
         if (stage.getStyle() != StageStyle.TRANSPARENT) {
@@ -122,10 +104,10 @@ public class UndecoratorScene extends Scene {
         stage.setHeight(undecorator.getPrefHeight());
     }
 
-    public void removeDefaultStylesheet() {
-        undecorator.getStylesheets().remove(STYLESHEET);
-        undecorator.getStylesheets().remove(STYLESHEET_UTILITY);
-    }
+//    public void removeDefaultStylesheet() {
+//        undecorator.getStylesheets().remove(STYLESHEET);
+//        undecorator.getStylesheets().remove(STYLESHEET_UTILITY);
+//    }
 
     public void addStylesheet(String css) {
         undecorator.getStylesheets().add(css);

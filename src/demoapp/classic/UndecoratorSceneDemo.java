@@ -52,9 +52,6 @@ public class UndecoratorSceneDemo extends Application {
         fxmlLoader.setController(this);
         Region root = (Region) fxmlLoader.load();
         
-        // Override default Touch theme for this demo
-       UndecoratorScene.setClassicDecoration();
-        
         // The Undecorator as a Scene
         final UndecoratorScene undecoratorScene = new UndecoratorScene(primaryStage, root);
         // Overrides defaults
@@ -123,7 +120,7 @@ public class UndecoratorSceneDemo extends Application {
         Region root = (Region) fxmlLoader.load();
         Stage utilityStage = new Stage();
         utilityStage.setTitle("Stage Utility type demo");
-        UndecoratorScene scene = new UndecoratorScene(utilityStage, StageStyle.UTILITY, root, null);
+        UndecoratorScene scene = new UndecoratorScene(utilityStage, root, StageStyle.UTILITY);
         // Overrides defaults
         scene.addStylesheet("demoapp/classic/demoapp.css");
 

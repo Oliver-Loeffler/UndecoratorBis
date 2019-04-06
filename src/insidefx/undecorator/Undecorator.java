@@ -26,10 +26,8 @@
  */
 package insidefx.undecorator;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
-import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -75,6 +73,7 @@ import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import skin.classic.ClassicTheme;
 
 /**
  * This class, with the UndecoratorController, is the central class for the decoration of Transparent Stages. The Stage
@@ -154,23 +153,19 @@ public class Undecorator extends StackPane {
     }
 
     public Undecorator(Stage stage, Region root) {
-        this(stage, root, "stagedecoration.fxml", StageStyle.UNDECORATED);
+        this(stage, root, new ClassicTheme(), StageStyle.UNDECORATED);
     }
 
-    public Undecorator(Stage stag, Region clientArea, String stageDecorationFxml, StageStyle st) {
-        create(stag, clientArea, getClass().getResource(stageDecorationFxml), st);
+    public Undecorator(Stage stag, Region clientArea, Theme theme, StageStyle st) {
+        create(stag, clientArea, theme, st);
     }
 
-    public Undecorator(Stage stag, Region clientArea, URL stageDecorationFxmlAsURL, StageStyle st) {
-        create(stag, clientArea, stageDecorationFxmlAsURL, st);
-    }
-
-    public void create(Stage stag, Region clientArea, URL stageDecorationFxmlAsURL, StageStyle st) {
+    public void create(Stage stag, Region clientArea, Theme theme, StageStyle st) {
         this.stage = stag;
         this.clientArea = clientArea;
 
         setStageStyle(st);
-        loadConfig();
+        loadConfig(theme);
 
         // Properties 
         maximizeProperty = new SimpleBooleanProperty(false);
@@ -227,9 +222,20 @@ public class Undecorator extends StackPane {
 
         // UI part of the decoration
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(stageDecorationFxmlAsURL);
+        	URL decorationFxml = theme.getDecoration();
+        	if (st.equals(StageStyle.UTILITY)) {
+        		decorationFxml = theme.getUtilityDecoration();
+        	}
+            FXMLLoader fxmlLoader = new FXMLLoader(decorationFxml);
             fxmlLoader.setController(this);
             stageDecoration = (Pane) fxmlLoader.load();
+            
+            if (st.equals(StageStyle.UTILITY)) {
+            	this.getStylesheets().add(theme.getUtilityStylesheet().toExternalForm());
+            } else {
+            	this.getStylesheets().add(theme.getStylesheet().toExternalForm());
+            }
+                        
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, "Decorations not found", ex);
         }
@@ -930,17 +936,12 @@ public class Undecorator extends StackPane {
         }
     }
 
-    void loadConfig() {
-        Properties prop = new Properties();
-
-        try {
-            prop.load(Undecorator.class
-                    .getClassLoader().getResourceAsStream("skin/undecorator.properties"));
-            SHADOW_WIDTH = Integer.parseInt(prop.getProperty("window-shadow-width"));
-            RESIZE_PADDING = Integer.parseInt(prop.getProperty("window-resize-padding"));
-        } catch (IOException ex) {
-            LOGGER.log(Level.SEVERE, "Error while loading confguration file", ex);
-        }
+    void loadConfig(Theme theme) {
+        
+    	theme.tryLoadingProperties();
+    	SHADOW_WIDTH = theme.getProperty(ThemeProperty.WINDOW_SHADOW_WIDTH, 15);
+    	RESIZE_PADDING = theme.getProperty(ThemeProperty.WINDOW_RESIZE_PADDING, 7);
+    	
         LOC = ResourceBundle.getBundle("insidefx/undecorator/resources/localization", Locale.getDefault());
 
     }
