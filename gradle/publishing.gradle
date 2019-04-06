@@ -26,6 +26,21 @@ jar {
     }
 }
 
+task sourcesJar(type: Jar) {
+    group 'Build'
+    description 'An archive of the source code'
+    classifier 'sources'    
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar) {
+    group 'Build'
+    description 'An archive of the javadoc'
+    classifier 'javadoc'
+    from javadoc.destinationDir
+}
+
+
 def pomConfig = {
     name project.name
     url project.project_url
@@ -81,4 +96,49 @@ bintray {
         vcsUrl = project.project_scm
         publicDownloadNumbers = true
     }
+}
+
+// MAVEN CENTRAL
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+        authentication(userName: ossrhUsername, password: ossrhPassword)
+      }
+
+      snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+        authentication(userName: ossrhUsername, password: ossrhPassword)
+      }
+
+      pom.project {
+        name 'UndecoratorBis'
+        packaging 'jar' 
+        description 'A fork of in-sideFX window decoration API for JavaFX, see also https://bintray.com/in-sidefx'
+        url 'https://github.com/in-sideFX/UndecoratorBis'
+
+        scm {
+          connection 'scm:git:https://github.com/Oliver-Loeffler/UndecoratorBis.git'
+          developerConnection 'scm:git:https://github.com/Oliver-Loeffler/UndecoratorBis.git'
+          url 'https://github.com/Oliver-Loeffler/UndecoratorBis.git'
+        }
+
+        licenses {
+          license {
+            name 'The 2-Clause BSD License'
+            url 'https://opensource.org/licenses/BSD-2-Clause'
+          }
+        }
+
+        developers {
+          developer {
+            id 'oloeffler'
+            name 'Oliver Loeffler'
+            email 'oliver@raumzeitfalle.de'
+          }
+        }
+      }
+    }
+  }
 }

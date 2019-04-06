@@ -15,7 +15,10 @@ buildscript {
 allprojects {
     apply plugin: 'base'
     apply plugin: 'idea'
+	apply plugin: 'eclipse'
     apply plugin: 'com.github.ben-manes.versions'
+    apply plugin: 'maven'
+    apply plugin: 'signing'
 
     repositories {
         jcenter()
@@ -54,21 +57,21 @@ subprojects { subproj ->
 
     sourceSets {
         main {
-            compileClasspath += [configurations.compileOnly]
+            compileClasspath += configurations.compileOnly
         }
         test {
-            compileClasspath += [configurations.testCompileOnly]
+            compileClasspath += configurations.testCompileOnly
         }
     }
 
     javadoc {
-        classpath += [configurations.compileOnly]
+       classpath += configurations.compileOnly
     }
 
     idea {
         module {
-            scopes.PROVIDED.plus += [configurations.compileOnly]
-            scopes.PROVIDED.plus += [configurations.testCompileOnly]
+          scopes.PROVIDED.plus += configurations.compileOnly
+          scopes.PROVIDED.plus += configurations.testCompileOnly
         }
     }
 }
