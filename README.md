@@ -40,4 +40,5 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
  * Code forked from https://github.com/in-sideFX/UndecoratorBis
  * Gradle build script updated so that it works with Gradle 5.2.1
  * Gradle Wrapper added
- * Version 0.1.0 of UndecoratorBis now released to [The Central Repository](https://search.maven.org/search?q=g:net.raumzeitfalle.fx)  
+ * Version 0.1.0 of UndecoratorBis now released to [The Central Repository](https://search.maven.org/search?q=g:net.raumzeitfalle.fx)
+ * This version is API compatible with [UndecoratorBis](https://github.com/in-sideFX/UndecoratorBis) as available at [Bintray](https://bintray.com/in-sidefx/maven/undecorator).
