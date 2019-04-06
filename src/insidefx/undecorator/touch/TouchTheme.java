@@ -1,4 +1,4 @@
-package skin.touch;
+package insidefx.undecorator.touch;
 
 import insidefx.undecorator.Theme;
 

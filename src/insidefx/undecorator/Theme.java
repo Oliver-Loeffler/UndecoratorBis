@@ -62,11 +62,6 @@ public abstract class Theme {
 		return this.properties;
 		
 	}
-
-	public Properties getProperties() {
-		tryLoadingProperties();
-		return this.properties;
-	}
 	
 	public int getProperty(ThemeProperty key, int defaultValue) {
 		String value = properties.getProperty(key.toString(), String.valueOf(defaultValue));

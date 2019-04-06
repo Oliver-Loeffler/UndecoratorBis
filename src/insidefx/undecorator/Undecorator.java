@@ -31,6 +31,8 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import insidefx.undecorator.classic.ClassicTheme;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
@@ -73,7 +75,6 @@ import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import skin.classic.ClassicTheme;
 
 /**
  * This class, with the UndecoratorController, is the central class for the decoration of Transparent Stages. The Stage
