@@ -83,8 +83,8 @@ public class UndecoratorSceneDemoWxflat extends Application {
         initUI();
 
     	FrameTimer timer = new FrameTimer();
-		SimpleStringProperty title = new SimpleStringProperty("Metrology Process Control");
-		primaryStage.titleProperty().bind(Bindings.concat(title," ").concat(timer.framesPerSecond()));				
+		SimpleStringProperty title = new SimpleStringProperty("StringBinding Demo");
+		primaryStage.titleProperty().bind(Bindings.concat(title," in Action: ").concat(timer.framesPerSecond()));				
 	
         
         primaryStage.setScene(undecoratorScene);

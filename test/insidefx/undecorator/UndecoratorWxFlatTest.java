@@ -57,6 +57,13 @@ class UndecoratorWxFlatTest extends ApplicationTestTemplate {
 			.assertWindowSizeRestored();
 
 	}
+	
+	@Test
+	void maximizeAndRestoreIconChangesProperly() {
+		UndecoratorViewAdapter
+		.using(this,classUnderTest)
+		.assertNodeGraphicEquals(null);
+	}
 		
 	@Test
 	void titleBinding() throws IOException {

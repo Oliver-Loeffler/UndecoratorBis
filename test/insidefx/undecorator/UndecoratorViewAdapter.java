@@ -1,6 +1,7 @@
 package insidefx.undecorator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -119,4 +120,9 @@ final class UndecoratorViewAdapter {
 		return this;
 	}
 
+	public UndecoratorViewAdapter assertNodeGraphicEquals(Node node) {
+		// FxAssert.verifyThat(nodeQuery, nodeMatcher);
+		fail("Not implemented yet");
+		return this;
+	}
 }
