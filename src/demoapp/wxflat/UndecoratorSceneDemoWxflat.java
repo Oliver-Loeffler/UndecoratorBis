@@ -11,6 +11,8 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -50,7 +52,8 @@ public class UndecoratorSceneDemoWxflat extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ClientArea.fxml"));
         fxmlLoader.setController(this);
         Region root = (Region) fxmlLoader.load();
-
+        
+        
         // The Undecorator as a Scene
         final UndecoratorScene undecoratorScene = new UndecoratorScene(primaryStage, root, new WxFlatTheme());
         // Overrides defaults
@@ -79,8 +82,15 @@ public class UndecoratorSceneDemoWxflat extends Application {
         primaryStage.getIcons().addAll(image);
         initUI();
 
+    	FrameTimer timer = new FrameTimer();
+		SimpleStringProperty title = new SimpleStringProperty("Metrology Process Control");
+		primaryStage.titleProperty().bind(Bindings.concat(title," ").concat(timer.framesPerSecond()));				
+	
+        
         primaryStage.setScene(undecoratorScene);
         primaryStage.toFront();
+        
+        timer.start();
         primaryStage.show();
     }
 
