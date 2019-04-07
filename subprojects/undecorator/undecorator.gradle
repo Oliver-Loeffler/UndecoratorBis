@@ -12,6 +12,17 @@ sourceSets {
             exclude 'demoapp/**'
         }
     }
+    
+    test {
+        java {
+            srcDir rootProject.file('test')
+            exclude 'demoapp/**'
+        }
+        resources {
+            srcDir rootProject.file('test')
+            exclude 'demoapp/**'
+        }
+    }
 }
 
 	
