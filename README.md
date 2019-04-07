@@ -3,7 +3,11 @@ A fork of UndecoratorBis
 
 In 2014 Arnaud Nouard created a newer version of his JavaFX window decoration API called <a href="https://github.com/in-sideFX/Undecorator">Undecorator</a> with a focus on transparency and non-rectangular window support.
 
-As I really like the chosen approach and the API is released with a BSD-2-Clause license, I will try to continue development. The first steps are:
+As I really like the chosen approach and the API is released with a BSD-2-Clause license, I will try to continue development. 
+
+![Skins](logo.png)
+
+### The first steps are:
 
  * update the Gradle build to work with Gradle 5.2.1 or newer :+1:
  * enable Gradle Wrapper :+1:
@@ -24,8 +28,6 @@ As I really like the chosen approach and the API is released with a BSD-2-Clause
 Well, he would like to see more screenshots of apps built using UndecoratorBis, this will happen. I have already implemented 2 new themes and will share screens of them soon. The demo apps will be updated as well.
 
 The reason why I'd like to publish this one on https://search.maven.org is, that the environment where UndecoratorBis will be used, does not support other repositories than search.maven.org.
-
-![Skins](logo.png)
 
 ## License
 
