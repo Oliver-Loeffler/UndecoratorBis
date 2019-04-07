@@ -88,6 +88,15 @@ final class UndecoratorViewAdapter {
 		return this;
 	}
 
+	public UndecoratorViewAdapter waitForMillis(long millis) {
+		try {
+			Thread.sleep(millis);
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt(); 
+		}
+		return this;
+	}
+	
 	public UndecoratorViewAdapter maximizeOrRestore() {
 		
 		Button maximize = getRobot().from(nodeUnderTest).lookup("#maximize").query();
