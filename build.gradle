@@ -60,10 +60,15 @@ subprojects { subproj ->
     }
 
     dependencies {    
-        compileOnly project.files(project.jfxrtLocation)
+        compile 'de.jensd:fontawesomefx:8.9'
+        // compileOnly project.files(project.jfxrtLocation)
         
-        testCompileOnly 'org.junit.jupiter:junit-jupiter-api:5.4.1'
-	    runtimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.1'
+        testCompile 'org.junit.jupiter:junit-jupiter-api:5.4.1'
+        
+    	testCompile 'org.testfx:openjfx-monocle:8u76-b04'
+        testCompile 'org.testfx:testfx-junit5:4.0.15-alpha'
+        
+	    testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.4.1'
     }
 
     sourceSets {

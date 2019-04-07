@@ -6,19 +6,15 @@ import java.util.ResourceBundle;
 
 import org.junit.jupiter.api.Test;
 
-class UndecoratorTest {
 
+class UndecoratorTest {
+	
 	@Test
 	void loadResourceBundle() {
 		
 		ResourceBundle bundle = Undecorator.loadResourceBundle("localization");
 		assertNotNull(bundle);
 		
-	}
-	
-	@Test
-	void shallFail() {
-		fail("WithIntent!");
 	}
 
 }

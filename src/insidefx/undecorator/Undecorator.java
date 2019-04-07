@@ -38,6 +38,7 @@ import insidefx.undecorator.classic.ClassicTheme;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -630,8 +631,11 @@ public class Undecorator extends StackPane {
             minimize.setOnAction(actionEvent->switchMinimize());
         }
         
-        // Transfer stage title to undecorator tiltle label
-        title.setText(stage.getTitle());
+        title.textProperty().bind(stage.titleProperty());
+    }
+    
+    protected ReadOnlyStringProperty titleProperty( ) {
+    	return this.title.textProperty();
     }
     
     private void maximizeRestoreFromContextMenu(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
