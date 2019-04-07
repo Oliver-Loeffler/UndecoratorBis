@@ -16,9 +16,11 @@ Well, he would like to see more screenshots of apps built using UndecoratorBis, 
 
 The reason why I'd like to publish this one on https://search.maven.org is, that the environment where UndecoratorBis will be used, does not support other repositories than search.maven.org.
 
+![Skins](logo.png)
+
 ## License
 
-Copyright (c) 2014, in-sideFX
+Copyright (c) 2014-2016, in-sideFX
 All rights reserved.
 
 BSD License All rights reserved.
