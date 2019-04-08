@@ -97,11 +97,13 @@ public abstract class Theme {
 		}
 	}
 	
-	public static enum ThemeProperty {
+	public enum ThemeProperty {
 		
 		WINDOW_SHADOW_WIDTH("window-shadow-width"),
 		
-		WINDOW_RESIZE_PADDING("window-resize-padding");
+		WINDOW_RESIZE_PADDING("window-resize-padding"),
+		
+		WINDOW_ROUNDING_DELTA("window-rounding-delta");
 		
 		private final String key;
 		

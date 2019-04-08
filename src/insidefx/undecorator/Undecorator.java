@@ -92,7 +92,7 @@ public class Undecorator extends StackPane {
     
     // private int feedbackStroke = 4;
     
-    private double roundedDelta = 5;
+    private double roundedDelta = 0;
     
     private final Logger logger;
 
@@ -756,8 +756,6 @@ public class Undecorator extends StackPane {
         double w = b.getWidth();
         double h = b.getHeight();
         ObservableList<Node> list = super.getChildren();
-//        ROUNDED_DELTA=shadowRectangle.getArcWidth()/4;
-        roundedDelta = 0;
         for (Node node : list) {
             if (node == shadowRectangle) {
                 shadowRectangle.setWidth(w - shadowWidth * 2);
@@ -895,6 +893,7 @@ public class Undecorator extends StackPane {
     	
     	shadowWidth = theme.getProperty(ThemeProperty.WINDOW_SHADOW_WIDTH, 15);
     	resizePadding = theme.getProperty(ThemeProperty.WINDOW_RESIZE_PADDING, 7);
+    	roundedDelta = theme.getProperty(ThemeProperty.WINDOW_ROUNDING_DELTA, 0);
     	
     	LOC = loadResourceBundle("localization");
 
