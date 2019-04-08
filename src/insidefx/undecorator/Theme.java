@@ -97,13 +97,20 @@ public abstract class Theme {
 		}
 	}
 	
+	public boolean getProperty(ThemeProperty key, boolean defaultValue) {
+		String value = properties.getProperty(key.toString(), String.valueOf(defaultValue));
+		return Boolean.parseBoolean(value);
+	}
+	
 	public enum ThemeProperty {
 		
 		WINDOW_SHADOW_WIDTH("window-shadow-width"),
 		
 		WINDOW_RESIZE_PADDING("window-resize-padding"),
 		
-		WINDOW_ROUNDING_DELTA("window-rounding-delta");
+		WINDOW_ROUNDING_DELTA("window-rounding-delta"),
+		
+		FULLSCREEN_ENABLED("fullscreen-enabled");
 		
 		private final String key;
 		
