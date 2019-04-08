@@ -5,6 +5,13 @@ In 2014 Arnaud Nouard created a newer version of his JavaFX window decoration AP
 
 As I really like the chosen approach and the API is released with a BSD-2-Clause license, I will try to continue development. 
 
+The project does not yet work with Java 9 or later out of the box. For now still Java 8 is required.
+To run tests and build:
+
+```
+$ ./gradlew clean check jar
+```
+
 ![Skins](logo.png)
 
 ### The first steps are:
@@ -23,7 +30,7 @@ As I really like the chosen approach and the API is released with a BSD-2-Clause
  * Add option to place client fxml into a dedicated area (pane) in decoration (e.g. right now the decoration overlaps the client content but in some cases this is not wanted)
  * Make stage transparency working with WXFlat
  * Expose titleProperty to re-enable use of bindings  
- * Add basic tests with JUnit 5 and TestFX
+ * Add basic tests with JUnit 5 and TestFX :+1:
  * Make the project work with Java 11 and JavaFX 11
  * Add Ubuntu-like and OSX-like skins
  * Add description on how Themes work, describe all style classes, all fx:ids and their purpose, how things work together.
