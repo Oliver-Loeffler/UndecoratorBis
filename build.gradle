@@ -1,7 +1,9 @@
 buildscript {
+
     repositories {
         jcenter()
         mavenCentral()
+        maven {url "https://plugins.gradle.org/m2/"}
     }
 
     dependencies {
@@ -9,6 +11,7 @@ buildscript {
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6'
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.12.0'
         classpath 'net.nemerosa:versioning:1.6.2'
+        classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.7'
     }
 }
 
@@ -19,6 +22,7 @@ allprojects {
     apply plugin: 'com.github.ben-manes.versions'
     apply plugin: 'maven'
     apply plugin: 'signing'
+    apply plugin: 'org.sonarqube'
 
     repositories {
         jcenter()
