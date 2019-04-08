@@ -650,6 +650,13 @@ public class Undecorator extends StackPane {
              if (resize != null) {
                  resize.setVisible(false);
              }
+             
+			 Node icon = maximize.getGraphic();
+			 if (null != icon) {
+			     icon.getStyleClass().add("decoration-glyph-restore");
+			     icon.getStyleClass().remove("decoration-glyph-maximize");
+			 }
+
          } else {
              tooltip.setText(LOC.getString("Maximize"));
              maximizeMenuItem.setText(LOC.getString("Maximize"));
@@ -657,6 +664,12 @@ public class Undecorator extends StackPane {
              if (resize != null) {
                  resize.setVisible(true);
              }
+             
+             Node icon = maximize.getGraphic();
+			 if (null != icon) {
+				 icon.getStyleClass().add("decoration-glyph-maximize");
+			     icon.getStyleClass().remove("decoration-glyph-restore");
+			 }
          }
     }
 

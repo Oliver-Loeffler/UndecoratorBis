@@ -1,13 +1,18 @@
 package insidefx.undecorator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.function.Function;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
@@ -19,10 +24,14 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Labeled;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 final class UndecoratorViewAdapter {
+	
+	private final Logger logger = Logger.getLogger(UndecoratorViewAdapter.class.getName());
 	
 	private final FxRobotInterface robot;
 	
@@ -129,9 +138,56 @@ final class UndecoratorViewAdapter {
 		return this;
 	}
 
-	public UndecoratorViewAdapter assertNodeGraphicEquals(Node node) {
-		// FxAssert.verifyThat(nodeQuery, nodeMatcher);
-		fail("Not implemented yet");
+	public UndecoratorViewAdapter assertChildNodeHasStyleClass(String expectedStyleClass, String nodeQuery, Function<Labeled,Node> mapper) {
+		
+		Node child = getChild(nodeQuery, mapper);
+		
+		if (null != child) {
+			logger.log(Level.INFO,String.valueOf(child.getStyleClass().toString()));
+		}
+		
+        assertTrue(child.getStyleClass().contains(expectedStyleClass));
+		
 		return this;
+	}
+	
+	public UndecoratorViewAdapter assertChildNodeHasNotStyleClass(String expectedStyleClass, String nodeQuery, Function<Labeled,Node> mapper) {
+		
+		Node child = getChild(nodeQuery, mapper);
+        assertFalse(child.getStyleClass().contains(expectedStyleClass));
+		
+		return this;
+	}
+
+	private Node getChild(String nodeQuery, Function<Labeled, Node> mapper) {
+		Node node = getRobot().from(nodeUnderTest).lookup(nodeQuery).query();
+		
+		assertTrue(node instanceof javafx.scene.control.Labeled);
+		
+		Node child = mapper.apply((Labeled) node);
+
+        assertNotNull(child);        
+		return child;
+	}
+
+	public UndecoratorViewAdapter assertStageIsMaximized() {
+		assertTrue(checkIfStageIsMaximized());
+		return this;
+	}
+	
+	public UndecoratorViewAdapter assertStageIsNotMaximized() {
+		assertFalse(checkIfStageIsMaximized());
+		return this;
+	}
+
+	private boolean checkIfStageIsMaximized() {
+		Stage stage = (Stage) nodeUnderTest.getScene().getWindow();
+
+		Screen screen = Screen.getPrimary();
+		Rectangle2D bounds = screen.getVisualBounds();
+		
+		Rectangle2D stageBounds = new Rectangle2D(0d, 0d, stage.getWidth(), stage.getHeight());
+		
+		return bounds.equals(stageBounds);
 	}
 }

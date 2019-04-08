@@ -94,7 +94,6 @@
                         <MaterialDesignIconView fill="WHITE" glyphName="WINDOW_MINIMIZE" size="22">
                            <styleClass>
                               <String fx:value="decoration-glyph-minimize" />
-                              <String fx:value="decoration-button-minimize" />
                            </styleClass>
                         </MaterialDesignIconView>
                      </graphic>
@@ -107,7 +106,6 @@
                         <MaterialDesignIconView fill="WHITE" glyphName="WINDOW_MAXIMIZE" size="22">
                            <styleClass>
                               <String fx:value="decoration-glyph-maximize" />
-                              <String fx:value="decoration-button-maximize" />
                            </styleClass>
                         </MaterialDesignIconView>
                      </graphic>

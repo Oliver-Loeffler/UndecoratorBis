@@ -3,13 +3,16 @@ package insidefx.undecorator;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
+import java.util.function.Function;
 
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxAssert;
 import org.testfx.matcher.control.LabeledMatchers;
 
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -59,10 +62,35 @@ class UndecoratorWxFlatTest extends ApplicationTestTemplate {
 	}
 	
 	@Test
-	void maximizeAndRestoreIconChangesProperly() {
+	void maximizeIcon() {
+		
+		Function<Labeled,Node> mapping = l->l.getGraphic();
+		
 		UndecoratorViewAdapter
-		.using(this,classUnderTest)
-		.assertNodeGraphicEquals(null);
+		    .using(this,classUnderTest)
+		    .assertStageIsNotMaximized()
+		    .assertChildNodeHasStyleClass("glyph-icon", "#maximize", mapping)
+		    .assertChildNodeHasStyleClass("decoration-glyph-maximize", "#maximize", mapping)
+		    .assertChildNodeHasNotStyleClass("decoration-button-restore", "#maximize", mapping)
+		    .assertChildNodeHasNotStyleClass("decoration-button-maximize", "#maximize", mapping);
+
+	}
+	
+	@Test
+	void maximizeAndRestoreIconChangesProperly() throws IOException {
+		
+		Function<Labeled,Node> mapping = l->l.getGraphic();
+		
+		UndecoratorViewAdapter
+		    .using(this,classUnderTest)
+		    .maximizeOrRestore()
+		    .assertStageIsMaximized()
+		    .captureImage(classUnderTest, "UndecoratorWXFlatMaximized.png")
+		    .assertChildNodeHasStyleClass("glyph-icon", "#maximize", mapping)
+		    .assertChildNodeHasStyleClass("decoration-glyph-restore", "#maximize", mapping)
+		    .assertChildNodeHasNotStyleClass("decoration-button-restore", "#maximize", mapping)
+		    .assertChildNodeHasNotStyleClass("decoration-button-maximize", "#maximize", mapping);
+
 	}
 		
 	@Test
