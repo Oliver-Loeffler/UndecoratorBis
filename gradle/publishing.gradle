@@ -64,40 +64,6 @@ def pomConfig = {
     }
 }
 
-publishing {
-    publications {      
-        mavenJava(MavenPublication) {
-            from components.java
-            artifact sourcesJar
-            artifact javadocJar
-
-            pom.withXml {
-                asNode().children().last() + pomConfig
-                asNode().appendNode('description', project.project_description)
-            }
-        }
-    }
-}
-
-if (!project.hasProperty('bintrayUsername')) ext.bintrayUsername = 'in-sidefx'
-if (!project.hasProperty('bintrayApiKey')) ext.bintrayApiKey = ''
-
-bintray {
-    publications = ['mavenJava']
-    pkg {
-        repo = project.project_bintray_repo
-        userOrg = project.project_bintray_org
-        name = project.name
-        desc = project.project_description
-        licenses = ['BSD 2-Clause']
-        labels = ['javafx']
-        websiteUrl = project.project_url
-        issueTrackerUrl = project.project_issues
-        vcsUrl = project.project_scm
-        publicDownloadNumbers = true
-    }
-}
-
 // MAVEN CENTRAL
 uploadArchives {
   repositories {
