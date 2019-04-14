@@ -38,6 +38,11 @@ allprojects {
     wrapper {            
 		gradleVersion = '5.2.1'
 	}
+
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+	compileJava.options.encoding = 'UTF-8'
+		
 }
 
 subprojects { subproj ->

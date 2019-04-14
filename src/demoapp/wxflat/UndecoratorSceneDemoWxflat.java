@@ -121,7 +121,7 @@ public class UndecoratorSceneDemoWxflat extends Application {
         Region root = (Region) fxmlLoader.load();
         Stage utilityStage = new Stage();
         utilityStage.setTitle("Stage Utility type demo");
-        UndecoratorScene scene = new UndecoratorScene(utilityStage, root, StageStyle.UTILITY);
+        UndecoratorScene scene = new UndecoratorScene(utilityStage, root, StageStyle.UTILITY, new WxFlatTheme());
         // Overrides defaults
         scene.addStylesheet("demoapp/wxflat/demoapp.css");
 

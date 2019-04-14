@@ -1,18 +1,17 @@
-/**
- * Copyright 2014-2016 Arnaud Nouard. All rights reserved.
- *
+/* Copyright 2019 Oliver Loeffler. All rights reserved.
+ * 
  * All rights reserved.
- *
+ * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- *
+ * 
  * * Redistributions of source code must retain the above copyright notice, this
  *   list of conditions and the following disclaimer.
- *
+ * 
  * * Redistributions in binary form must reproduce the above copyright notice,
  *   this list of conditions and the following disclaimer in the documentation
  *   and/or other materials provided with the distribution.
- *
+ * 
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -23,34 +22,55 @@
  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
  */
+
 /* 
-    Document   : Undecorator
-    Created on : Dec 19, 2014
-    Author     : In-SideFX
-    Description:
-        Demo app purpose
+    Document   : WXFlat theme for Undecorator
+    Created on : Mar 31, 2019
+    Author     : Oliver Löffler
+    Description: Window decoration similar to what Win10 uses 
+    
 */
+
+* {
+    -wxflat-main-color: rgb(147, 147, 190, 1);
+}
+
+* {
+    -wxflat-hover-color: derive(-wxflat-main-color, -35%);
+}
+
+* {
+    -wxflat-alert-color: rgb(204, 29 , 46, 1);
+}
 
 /*
     The Stage background.
     Currently a Rectangle node
 */
-
 .decoration-background{
     -fx-fill: rgba(255,255,255,0.9);
     -fx-stroke-width: 0;
-    -fx-arc-width:20px;
-    -fx-arc-height:20px;
+    -fx-arc-width:30px;
+    -fx-arc-height:30px;
 }
 
-.decoration-shadow{
+.decoration-topbar {
+    -fx-background-color: derive(-wxflat-main-color, -65%);
+}
+/*
+    Defines the rectangle responsible for the shadow
+*/
+/*.decoration-shadow{
     -fx-fill: black;
     -fx-stroke-width: 0;
     -fx-arc-width:20px;
-    -fx-arc-height:20px;
-}
-
+    -fx-arc-height:30px;
+}*/
+/*
+ Used to declare the definition of stage resize zone
+*/
 .decoration-resize{
     -fx-fill:null;  /* avoid mouse events in the middle*/
     -fx-border-color: transparent;
@@ -60,48 +80,89 @@
 /*
     The title bar label
 */
-/*.undecorator-label-titlebar{
-    -fx-text-fill: #000000;
-}*/
+.undecorator-label-titlebar{
+    -fx-text-fill: #CCCCCC; /* if defined here, no way to override it in external apps */
+    -fx-font-weight: normal;
+}
+
 /*
 *	Menu button
 */
 .decoration-button-menu{
     -fx-background-radius: 0;
-    -fx-border-style: null;
-    -fx-background-color: null;
-    -fx-background-image:url("./menu.png");
-    -fx-background-size: stretch;
+    -fx-background-insets: 0 0 -1 0;
+    -fx-border-style: none;
+
+    -fx-background-color: transparent;
 }
 
 .decoration-button-menu:hover{
-    -fx-background-color: null;
-    -fx-background-image:url("./menu-hover.png");
-    -fx-background-size: stretch;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0 0 -1 0;
+    -fx-border-style: none;
+
+    -fx-background-color: -wxflat-hover-color;
+}
+
+.decoration-glyph-menu {
+    -glyph-name: MICROSOFT;
+}
+
+/*
+ * Title bar
+ */
+.decoration-titlebar {
+    -fx-background-color: transparent;
+}
+
+.decoration-title {
+    -fx-background-color: transparent;
 }
 
 /*
 *	Close button
 */
-.decoration-button-close{
+.decoration-box-close {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0 0 -1 0;
+}
+
+.decoration-box-close:hover{
+    -fx-background-color: -wxflat-alert-color;
+    -fx-background-insets: 0 0 -1 0;
+    /* derive(-wxflat-alert-color, -40%); */
+}
+
+.decoration-button-close {
     -fx-background-radius: 0;
-    -fx-border-style: null;
-    -fx-background-color: null;
-    -fx-background-image:url("./close.png");
-    -fx-background-size: stretch;
+    -fx-border-style: none;
+    -fx-background-insets: 0 0 -1 0;
+    -fx-background-color: transparent;
 }
+
 .decoration-button-close:hover{
-    -fx-background-color: null;
-    -fx-background-image:url("./close-hover.png");
-    -fx-background-size: stretch;
+    -fx-background-radius: 0;
+    -fx-border-style: none;
+    -fx-background-insets: 0 0 -1 0;
+    -fx-background-color: transparent;
+    /* -fx-background-color: -wxflat-alert-color; */
 }
+
+.decoration-glyph-close {
+    -glyph-name: WINDOW_CLOSE;
+}
+
 
 /*
 *	Resize button
 */
 .decoration-button-resize{
     -fx-background-radius: 0;
-    -fx-border-style: null;
-    -fx-background-color: null;
-    -fx-background-image:url("./resizeSE.png");
+    -fx-border-style: none;
+    -fx-background-color: transparent;
+}
+
+
+.decoration-glyph-resize{
+    -glyph-name: RESIZE_BOTTOM_RIGHT;
 }
