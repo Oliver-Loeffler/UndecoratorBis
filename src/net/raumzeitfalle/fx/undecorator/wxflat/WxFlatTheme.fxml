@@ -45,7 +45,7 @@
    <children>
       <Button fx:id="resize" focusTraversable="false" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" minHeight="22.0" minWidth="22.0" mnemonicParsing="false" mouseTransparent="true" pickOnBounds="true" prefHeight="22.0" prefWidth="22.0" styleClass="decoration-button-resize" text="" AnchorPane.bottomAnchor="-5.0" AnchorPane.rightAnchor="-5.0">
          <graphic>
-            <MaterialDesignIconView fill="#8e8197" glyphName="RESIZE_BOTTOM_RIGHT" size="24" styleClass="decoration-glyph-resize" />
+            <SVGPath content="M22,22H20V20H22V22M22,18H20V16H22V18M18,22H16V20H18V22M18,18H16V16H18V18M14,22H12V20H14V22M22,14H20V12H22V14Z" fill="#8e8197" styleClass="decoration-glyph-resize"/>
          </graphic>
          <opaqueInsets>
             <Insets />
