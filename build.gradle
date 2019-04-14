@@ -64,7 +64,6 @@ subprojects { subproj ->
     }
 
     dependencies {    
-        compile 'de.jensd:fontawesomefx:8.9'
         // compileOnly project.files(project.jfxrtLocation)
         
         testCompile 'org.junit.jupiter:junit-jupiter-api:5.4.1'
