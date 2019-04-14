@@ -30,7 +30,7 @@
 
 -->
 
-<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -39,8 +39,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane id="decorationRoot" fx:id="decorationRoot" pickOnBounds="false" prefHeight="400.0" prefWidth="600.0" styleClass="decoration-resize" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="decorationRoot" fx:id="decorationRoot" pickOnBounds="false" prefHeight="400.0" prefWidth="600.0" styleClass="decoration-resize" xmlns="http://javafx.com/javafx/8.5" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="resize" focusTraversable="false" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" minHeight="22.0" minWidth="22.0" mnemonicParsing="false" mouseTransparent="true" pickOnBounds="true" prefHeight="22.0" prefWidth="22.0" styleClass="decoration-button-resize" text="" AnchorPane.bottomAnchor="-5.0" AnchorPane.rightAnchor="-5.0">
          <graphic>
@@ -59,7 +60,7 @@
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
                      <graphic>
-                        <MaterialDesignIconView fill="WHITE" glyphName="FULLSCREEN" size="22" styleClass="decoration-glyph-menu" />
+                        <SVGPath content="M2,3H11V12H2V3M11,22H2V13H11V22M21,3V12H12V3H21M21,22H12V13H21V22ZM2,3H11V12H2V3M11,22H2V13H11V22M21,3V12H12V3H21M21,22H12V13H21V22Z" fill="WHITE" styleClass="decoration-glyph-menu"/>
                      </graphic>
                      <contextMenu>
                         <ContextMenu fx:id="contextMenu" />
@@ -81,7 +82,7 @@
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
                      <graphic>
-                        <MaterialDesignIconView fill="WHITE" glyphName="FULLSCREEN" size="22" styleClass="decoration-glyph-fullscreen" />
+                        <SVGPath content="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10ZM5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" fill="WHITE" styleClass="decoration-glyph-fullscreen"/>
                      </graphic>
                      <padding>
                         <Insets left="5.0" right="5.0" />
@@ -92,11 +93,7 @@
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
                      <graphic>
-                        <MaterialDesignIconView fill="WHITE" glyphName="WINDOW_MINIMIZE" size="22">
-                           <styleClass>
-                              <String fx:value="decoration-glyph-minimize" />
-                           </styleClass>
-                        </MaterialDesignIconView>
+                        <SVGPath content="M20,14H4V10H20M20,14H4V10H20" fill="WHITE" styleClass="decoration-glyph-minimize"/>
                      </graphic>
                   </Button>
                 <Button fx:id="maximize" contentDisplay="GRAPHIC_ONLY" maxHeight="32.0" minHeight="32.0" mnemonicParsing="false" pickOnBounds="true" prefHeight="32.0" styleClass="decoration-button-maximize" text="" textFill="WHITE">
@@ -104,11 +101,7 @@
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
                      <graphic>
-                        <MaterialDesignIconView fill="WHITE" glyphName="WINDOW_MAXIMIZE" size="22">
-                           <styleClass>
-                              <String fx:value="decoration-glyph-maximize" />
-                           </styleClass>
-                        </MaterialDesignIconView>
+                        <SVGPath content="M4,4H20V20H4V4M6,8V18H18V8H6ZM4,4H20V20H4V4M6,8V18H18V8H6Z" fill="WHITE" styleClass="decoration-glyph-maximize"/>
                      </graphic>
                      <HBox.margin>
                         <Insets />
@@ -121,12 +114,12 @@
                               <Cursor fx:constant="DEFAULT" />
                            </cursor>
                            <graphic>
-                              <MaterialDesignIconView fill="WHITE" glyphName="WINDOW_CLOSE" size="22">
+                              <SVGPath fill="WHITE" content="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z">
                                  <styleClass>
                                     <String fx:value="decoration-glyph-close" />
                                     <String fx:value="decoration-button-close" />
                                  </styleClass>
-                              </MaterialDesignIconView>
+                              </SVGPath>
                            </graphic>
                       </Button>
                      </children>

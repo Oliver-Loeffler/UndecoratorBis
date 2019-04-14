@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+
+<Scene xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <root>
+      <BorderPane prefHeight="200.0" prefWidth="312.0">
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="WINDOW_CLOSE">
+                     <graphic>
+                        <SVGPath content="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z" fill="WHITE" />
+                     </graphic>
+                  </Button>
+                  <Button alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="WINDOW_MAXIMIZE">
+                     <graphic>
+                        <SVGPath content="M4,4H20V20H4V4M6,8V18H18V8H6ZM4,4H20V20H4V4M6,8V18H18V8H6Z" fill="WHITE" />
+                     </graphic>
+                  </Button>
+                  <Button alignment="CENTER" layoutX="10.0" layoutY="37.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="WINDOW_MINIMIZE">
+                     <graphic>
+                        <SVGPath content="M20,14H4V10H20M20,14H4V10H20" fill="WHITE" />
+                     </graphic>
+                  </Button>
+                  <Button alignment="CENTER" layoutX="10.0" layoutY="64.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="WINDOW_RESTORE">
+                     <graphic>
+                        <SVGPath content="M4,8H8V4H20V16H16V20H4V8M16,8V14H18V6H10V8H16M6,12V18H14V12H6ZM4,8H8V4H20V16H16V20H4V8M16,8V14H18V6H10V8H16M6,12V18H14V12H6Z" fill="WHITE" />
+                     </graphic>
+                  </Button>
+                  <Button alignment="CENTER" layoutX="10.0" layoutY="91.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="WINDOW_FULLSCREEN">
+                     <graphic>
+                        <SVGPath content="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10ZM5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" fill="WHITE" />
+                     </graphic>
+                  </Button>
+                  <Button alignment="CENTER" layoutX="10.0" layoutY="118.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="WINDOW_FULLSCREEN_EXIT">
+                     <graphic>
+                        <SVGPath content="M14,14H19V16H16V19H14V14M5,14H10V19H8V16H5V14M8,5H10V10H5V8H8V5M19,8V10H14V5H16V8H19ZM14,14H19V16H16V19H14V14M5,14H10V19H8V16H5V14M8,5H10V10H5V8H8V5M19,8V10H14V5H16V8H19Z" fill="WHITE" />
+                     </graphic>
+                  </Button>
+                  <Button alignment="CENTER" layoutX="10.0" layoutY="145.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="WINDOW_MENU">
+                     <graphic>
+                        <SVGPath content="M2,3H11V12H2V3M11,22H2V13H11V22M21,3V12H12V3H21M21,22H12V13H21V22ZM2,3H11V12H2V3M11,22H2V13H11V22M21,3V12H12V3H21M21,22H12V13H21V22Z" fill="WHITE" />
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </root>
+</Scene>
