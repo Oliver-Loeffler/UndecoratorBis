@@ -47,6 +47,15 @@ class TouchThemeTest {
 		
 	}
 
+
+	@Test
+	void fullscreenEnabled() throws IOException {
+		Properties props = classUnderTest.loadAndGetProperties();
+		assertNotNull(props);
+		
+		assertTrue(classUnderTest.fullscreenEnabled());
+	}
+	
 	void assertThat(String resourceName, URL source) {
 		
 		URL expected = getClass().getResource(resourceName);

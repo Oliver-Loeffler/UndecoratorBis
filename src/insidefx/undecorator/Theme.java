@@ -39,7 +39,7 @@ public abstract class Theme {
 	private String stageCss;
 	private String utilityStageCss;
 	private String propertiesFileName;
-	
+		
 	private final Properties properties;
 	
 	private final Logger logger;
@@ -66,6 +66,10 @@ public abstract class Theme {
 	public URL getUtilityStylesheet() { return asResource(utilityStageCss); }
 
 	public URL getUtilityDecoration() { return asResource(utilityStageFxml); }
+	
+	public boolean fullscreenEnabled() {
+		return getProperty(ThemeProperty.FULLSCREEN_ENABLED, true);
+	}
 	
 	protected void loadProperties() throws IOException {
 		URL resource = asResource(propertiesFileName);

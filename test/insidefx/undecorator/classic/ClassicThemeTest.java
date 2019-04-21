@@ -2,6 +2,7 @@ package insidefx.undecorator.classic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.net.URL;
@@ -46,6 +47,14 @@ class ClassicThemeTest {
 		assertEquals(15, classUnderTest.getProperty(ThemeProperty.WINDOW_SHADOW_WIDTH, 0));
 		assertEquals(7, classUnderTest.getProperty(ThemeProperty.WINDOW_RESIZE_PADDING, 0));
 		
+	}
+	
+	@Test
+	void fullscreenEnabled() throws IOException {
+		Properties props = classUnderTest.loadAndGetProperties();
+		assertNotNull(props);
+		
+		assertTrue(classUnderTest.fullscreenEnabled());
 	}
 	
 	void assertThat(String resourceName, URL source) {
