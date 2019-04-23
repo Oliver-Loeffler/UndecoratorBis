@@ -46,6 +46,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.geometry.Side;
 import javafx.scene.CacheHint;
@@ -83,7 +84,7 @@ import javafx.util.Duration;
  * Bugs (Mac only?): Accelerators + Fullscreen crashes JVM KeyCombination does not respect keyboard's locale. Multi
  * screen: On second screen JFX returns wrong value for MinY (300)
  */
-public class Undecorator extends StackPane {
+public class Undecorator extends StackPane implements Initializable {
 
 	private int shadowWidth = 15;
     private int savedShadowWidth = 15;
@@ -99,6 +100,8 @@ public class Undecorator extends StackPane {
     public static ResourceBundle LOC;
     
     private final StageStyle stageStyle;
+    
+    private boolean fullscreenEnabled = false;
     
     @FXML
     private Button menu;
@@ -156,6 +159,8 @@ public class Undecorator extends StackPane {
     
     private final String decorationBackgroundStyle = "decoration-background";
     
+    private final Theme theme;
+    
     TranslateTransition fullscreenButtonTransition;
     
     final Rectangle internal = new Rectangle();
@@ -196,10 +201,15 @@ public class Undecorator extends StackPane {
     	
     	this.maximizeMenuItem = new MenuItem("Maximize");
     	this.fullScreenMenuItem = new CheckMenuItem("FullScreen");
-    	
-    	loadConfig(theme);
-        decorateWith(theme);
+
+    	this.theme = theme;
     }
+    
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		loadConfig(theme);
+		decorateWith(theme);
+	}
 
     protected void decorateWith(Theme theme) {       
         maximizeProperty.addListener((o,a,b)->getController().maximizeOrRestore());
@@ -299,6 +309,12 @@ public class Undecorator extends StackPane {
     }
     
     private void onFullScreenToggle(ObservableValue<? extends Boolean> ov, Boolean t, Boolean fullscreenState) {
+    	if (fullscreenEnabled) {
+    		toggleFullscreen(ov, t, fullscreenState);
+    	}
+    }
+    
+    private void toggleFullscreen(ObservableValue<? extends Boolean> ov, Boolean t, Boolean fullscreenState) {
     	setShadow(!fullscreenState.booleanValue());
         fullScreenMenuItem.setSelected(fullscreenState.booleanValue());
         maximize.setVisible(!fullscreenState.booleanValue());
@@ -894,8 +910,12 @@ public class Undecorator extends StackPane {
     	shadowWidth = theme.getProperty(ThemeProperty.WINDOW_SHADOW_WIDTH, 15);
     	resizePadding = theme.getProperty(ThemeProperty.WINDOW_RESIZE_PADDING, 7);
     	roundedDelta = theme.getProperty(ThemeProperty.WINDOW_ROUNDING_DELTA, 0);
+    	fullscreenEnabled = theme.fullscreenEnabled();
     	
     	LOC = loadResourceBundle("localization");
+    	
+    	fullScreenMenuItem.setDisable(!fullscreenEnabled);
+    	fullscreenProperty.set(fullscreenEnabled);
 
     }
 
@@ -904,4 +924,5 @@ public class Undecorator extends StackPane {
         		(Undecorator.class.getPackage().getName()+"."+bundleName).replace('.', '/'), 
         		Locale.getDefault());
 	}
+
 }

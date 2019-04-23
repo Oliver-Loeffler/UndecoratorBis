@@ -1,5 +1,5 @@
-include 'subprojects/undecorator'
-include 'subprojects/demo'
+include 'subprojects/undecorator-core'
+include 'subprojects/undecorator-demo'
 
 rootProject.name = 'UndecoratorBis'
 rootProject.children.each { project ->

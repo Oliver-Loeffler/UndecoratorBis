@@ -3,7 +3,7 @@ apply plugin: 'application'
 mainClassName = 'demoapp.classic.UndecoratorSceneDemo'
 
 dependencies {
-    compile project(':undecorator')
+    compile project(':undecorator-core')
 }
 
 sourceSets {
