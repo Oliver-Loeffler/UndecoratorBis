@@ -202,7 +202,7 @@ public class Undecorator extends StackPane {
     }
     
     private void applyTheme(Theme theme) {
-		loadConfig(theme);
+		applyConfig(theme);
 		decorateWith(theme);
 	}
 
@@ -898,10 +898,8 @@ public class Undecorator extends StackPane {
         }
     }
 
-    void loadConfig(Theme theme) {
-        
-    	theme.tryLoadingProperties();
-    	
+    void applyConfig(Theme theme) {
+           	
     	shadowWidth = theme.getProperty(ThemeProperty.WINDOW_SHADOW_WIDTH, 15);
     	resizePadding = theme.getProperty(ThemeProperty.WINDOW_RESIZE_PADDING, 7);
     	roundedDelta = theme.getProperty(ThemeProperty.WINDOW_ROUNDING_DELTA, 0);
