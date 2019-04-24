@@ -69,7 +69,6 @@ class UndecoratorWxFlatTest extends ApplicationTestTemplate {
 		UndecoratorViewAdapter
 		    .using(this,classUnderTest)
 		    .assertStageIsNotMaximized()
-		    .assertChildNodeHasStyleClass("glyph-icon", "#maximize", mapping)
 		    .assertChildNodeHasStyleClass("decoration-glyph-maximize", "#maximize", mapping)
 		    .assertChildNodeHasNotStyleClass("decoration-button-restore", "#maximize", mapping)
 		    .assertChildNodeHasNotStyleClass("decoration-button-maximize", "#maximize", mapping);
@@ -86,7 +85,6 @@ class UndecoratorWxFlatTest extends ApplicationTestTemplate {
 		    .maximizeOrRestore()
 		    .assertStageIsMaximized()
 		    .captureImage(classUnderTest, "UndecoratorWXFlatMaximized.png")
-		    .assertChildNodeHasStyleClass("glyph-icon", "#maximize", mapping)
 		    .assertChildNodeHasStyleClass("decoration-glyph-restore", "#maximize", mapping)
 		    .assertChildNodeHasNotStyleClass("decoration-button-restore", "#maximize", mapping)
 		    .assertChildNodeHasNotStyleClass("decoration-button-maximize", "#maximize", mapping);
