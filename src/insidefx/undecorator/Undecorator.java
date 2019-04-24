@@ -46,7 +46,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.geometry.Side;
 import javafx.scene.CacheHint;
@@ -79,12 +78,12 @@ import javafx.util.Duration;
 
 /**
  * This class, with the UndecoratorController, is the central class for the decoration of Transparent Stages. The Stage
- * Undecorator TODO: Themes, manage Quit (main stage)
+ * Undecorator TODO: manage Quit (main stage)
  *
  * Bugs (Mac only?): Accelerators + Fullscreen crashes JVM KeyCombination does not respect keyboard's locale. Multi
  * screen: On second screen JFX returns wrong value for MinY (300)
  */
-public class Undecorator extends StackPane implements Initializable {
+public class Undecorator extends StackPane {
 
 	private int shadowWidth = 15;
     private int savedShadowWidth = 15;
@@ -159,8 +158,6 @@ public class Undecorator extends StackPane implements Initializable {
     
     private final String decorationBackgroundStyle = "decoration-background";
     
-    private final Theme theme;
-    
     TranslateTransition fullscreenButtonTransition;
     
     final Rectangle internal = new Rectangle();
@@ -201,12 +198,10 @@ public class Undecorator extends StackPane implements Initializable {
     	
     	this.maximizeMenuItem = new MenuItem("Maximize");
     	this.fullScreenMenuItem = new CheckMenuItem("FullScreen");
-
-    	this.theme = theme;
+    	this.applyTheme(theme);
     }
     
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+    private void applyTheme(Theme theme) {
 		loadConfig(theme);
 		decorateWith(theme);
 	}
