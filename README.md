@@ -23,10 +23,10 @@ $ ./gradlew clean check jar
  * Add example using FontawesomeFX :+1:
  * Expose titleProperty to re-enable use of bindings :+1:
  * Add basic tests with JUnit 5 and TestFX :+1:
- * Add example using SVG paths, make FontawesomeFX optional or a dependency of the concrete Theme used 
- * Add a new theme called WXflat when completed (utility stage is not finalized yet)
+ * Add a new theme called WXflat :+1:
+ * Uses SVG Paths for Icons - no extra dependency used for FontAwesome :+1: 
  * Make fullscreen optional and configurable (permit and deny fullscreen)
- * Make fullscreen button animation optional and configurable
+ * Make fullscreen button animation optional and configurable 
  * Make window resize handle in lower right optional
  * Replace theme properties with CSS and consider removing the properties code
  * Add option to place client fxml into a dedicated area (pane) in decoration (e.g. right now the decoration overlaps the client content but in some cases this is not wanted)
@@ -36,7 +36,7 @@ $ ./gradlew clean check jar
  * Add description on how Themes work, describe all style classes, all fx:ids and their purpose, how things work together.
 
 
-Well, he would like to see more screenshots of apps built using UndecoratorBis, this will happen. I have already implemented 2 new themes and will share screens of them soon. The demo apps will be updated as well.
+Well, he would like to see more screenshots of apps built using UndecoratorBis, this will happen. I have already implemented 2 new themes and will share screens of them soon. A demo app for WXFlat has been added recently.
 
 The reason why I'd like to publish this one on https://search.maven.org is, that the environment where UndecoratorBis will be used, does not support other repositories than search.maven.org.
 
