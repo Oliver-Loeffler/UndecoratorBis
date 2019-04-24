@@ -20,7 +20,6 @@ $ ./gradlew clean check jar
  * enable Gradle Wrapper :+1:
  * Publish version 0.1.0 on [https://search.maven.org](https://search.maven.org/search?q=g:net.raumzeitfalle.fx%20AND%20a:undecorator) :+1:
  * Introduce concept of themes. :+1:
- * Add example using FontawesomeFX :+1:
  * Expose titleProperty to re-enable use of bindings :+1:
  * Add basic tests with JUnit 5 and TestFX :+1:
  * Add a new theme called WXflat :+1:
