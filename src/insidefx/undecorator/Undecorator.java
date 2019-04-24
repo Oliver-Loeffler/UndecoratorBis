@@ -33,7 +33,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import insidefx.undecorator.Theme.ThemeProperty;
 import insidefx.undecorator.classic.ClassicTheme;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -900,9 +899,9 @@ public class Undecorator extends StackPane {
 
     void applyConfig(Theme theme) {
            	
-    	shadowWidth = theme.getProperty(ThemeProperty.WINDOW_SHADOW_WIDTH, 15);
-    	resizePadding = theme.getProperty(ThemeProperty.WINDOW_RESIZE_PADDING, 7);
-    	roundedDelta = theme.getProperty(ThemeProperty.WINDOW_ROUNDING_DELTA, 0);
+    	shadowWidth = theme.getShadowWidth();
+    	resizePadding = theme.getWindowResizePadding();
+    	roundedDelta = theme.getWindowRoundingDelta();
     	fullscreenEnabled = theme.fullscreenEnabled();
     	
     	LOC = loadResourceBundle("localization");

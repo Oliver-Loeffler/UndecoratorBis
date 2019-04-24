@@ -53,6 +53,7 @@ public abstract class Theme {
 		this.propertiesFileName = baseName + ".properties";
 		this.properties = new Properties();
 		this.logger = Logger.getLogger(getClass().getName());
+		this.tryLoadingProperties();
 	}
 	
 	private URL asResource(String name) {
@@ -126,6 +127,18 @@ public abstract class Theme {
 		public String toString() {
 			return this.key;
 		}
+	}
+	
+	public int getShadowWidth() {
+		return getProperty(ThemeProperty.WINDOW_SHADOW_WIDTH, 15);
+	}
+	
+	public int getWindowResizePadding() {
+		return getProperty(ThemeProperty.WINDOW_RESIZE_PADDING, 7);
+	}
+	
+	public double getWindowRoundingDelta() {
+		return getProperty(ThemeProperty.WINDOW_ROUNDING_DELTA, 0);
 	}
 }
 
