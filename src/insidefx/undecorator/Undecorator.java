@@ -41,6 +41,7 @@ import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -70,6 +71,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.SVGPath;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -222,40 +224,48 @@ public class Undecorator extends StackPane {
         undecoratorController.setAsStageDraggable(stage, titleanchor);
         
         // If not resizable (quick fix)
-        if (fullscreen
-                != null) {
+        if (fullscreen != null) {
             fullscreen.setVisible(stage.isResizable());
+            if (stage.isFullScreen()) {
+            	fullscreen.setScaleX(0.0);
+            } else {
+            	fullscreen.setScaleX(1.0);
+            }
         }
         if (resize != null) {
             resize.setVisible(stage.isResizable());
         }
-        if (maximize
-                != null) {
+        
+        if (maximize != null) {
             maximize.setVisible(stage.isResizable());
+            if (stage.isResizable()) {
+            	maximize.setScaleX(1.0);
+            } else {
+            	maximize.setScaleX(0.0);
+            }
         }
-        if (minimize
-                != null && !stage.isResizable()) {
+        
+        if (minimize != null && !stage.isResizable()) {
             AnchorPane.setRightAnchor(minimize, 34d);
         }
 
         // Glass Pane
         glassPane = new Pane();
-
         glassPane.setMouseTransparent(true);
         buildDockFeedbackStage();
 
         title.getStyleClass().add("undecorator-label-titlebar");
         shadowRectangle.getStyleClass().add(shadowBackgroundStyleClass);
-//        resizeRect.getStyleClass().add(resizeStyleClass);
+        // resizeRect.getStyleClass().add(resizeStyleClass);
         // Do not intercept mouse events on stage's shadow
         shadowRectangle.setMouseTransparent(true);
 
         // Is it possible to apply an effect without affecting decendent?
         super.setStyle("-fx-background-color:transparent;");
         // Or this:
-//        super.setStyle("-fx-background-color:transparent;-fx-border-color:white;-fx-border-radius:30;-fx-border-width:1;-fx-border-insets:"+SHADOW_WIDTH+";");
-//        super.setEffect(dsFocused);
-//          super.getChildren().addAll(clientArea,stageDecoration, glassPane);
+		//        super.setStyle("-fx-background-color:transparent;-fx-border-color:white;-fx-border-radius:30;-fx-border-width:1;-fx-border-insets:"+SHADOW_WIDTH+";");
+		//        super.setEffect(dsFocused);
+        // super.getChildren().addAll(clientArea,stageDecoration, glassPane);
 
         backgroundRect = new Rectangle();
         backgroundRect.getStyleClass().add(decorationBackgroundStyle);
@@ -263,7 +273,7 @@ public class Undecorator extends StackPane {
 
         // Add all layers
         super.getChildren().addAll(shadowRectangle, backgroundRect, clientArea, stageDecoration, glassPane);
-//        super.getChildren().addAll(shadowRectangle, backgroundRect);
+        // super.getChildren().addAll(shadowRectangle, backgroundRect);
 
         
         /*
@@ -275,8 +285,14 @@ public class Undecorator extends StackPane {
         /*
          * Fullscreen
          */
-        if (fullscreen
-                != null) {
+        
+        
+        
+        if (fullscreen != null) {
+        	
+        	fullscreen.disableProperty().setValue(fullscreenProperty.not().getValue());
+        	fullscreen.visibleProperty().setValue(fullscreenProperty.getValue());
+            
 //            fullscreen.setOnMouseEntered(new EventHandler<MouseEvent>() {
 //                @Override
 //                public void handle(MouseEvent t) {
@@ -297,6 +313,7 @@ public class Undecorator extends StackPane {
 
         	stage.fullScreenProperty().addListener(this::onFullScreenToggle);
         	
+
         }
 
         computeAllSizes();
@@ -318,8 +335,17 @@ public class Undecorator extends StackPane {
         }
         if (fullscreenState.booleanValue()) {
             // String and icon
-            fullscreen.getStyleClass().add("decoration-button-unfullscreen");
-            fullscreen.setTooltip(new Tooltip(LOC.getString("Restore")));
+        	if (null != fullscreen) {
+        		fullscreen.getStyleClass().remove("decoration-button-fullscreen");
+        		fullscreen.getStyleClass().add("decoration-button-unfullscreen");
+                fullscreen.setTooltip(new Tooltip(LOC.getString("Restore")));
+                
+                Node graphic = fullscreen.getGraphic();
+                if (graphic instanceof SVGPath) {
+                	graphic.getStyleClass().remove("decoration-graphic-fullscreen");
+                	graphic.getStyleClass().add("decoration-graphic-unfullscreen");	
+                }
+        	}
 
             undecoratorController.saveFullScreenBounds();
             if (fullscreenButtonTransition != null) {
@@ -339,8 +365,18 @@ public class Undecorator extends StackPane {
             fullscreenButtonTransition.play();
           //  fullscreen.setOpacity(0.2);
         } else {
-            // String and icon
-            fullscreen.getStyleClass().remove("decoration-button-unfullscreen");
+        	
+        	fullscreen.getStyleClass().remove("decoration-button-unfullscreen");
+    		fullscreen.getStyleClass().add("decoration-button-fullscreen");
+            fullscreen.setTooltip(new Tooltip(LOC.getString("Restore")));
+            
+            Node graphic = fullscreen.getGraphic();
+            if (graphic instanceof SVGPath) {
+            	graphic.getStyleClass().remove("decoration-graphic-unfullscreen");
+            	graphic.getStyleClass().add("decoration-graphic-fullscreen");	
+            }
+            
+            
             fullscreen.setTooltip(new Tooltip(LOC.getString("FullScreen")));
 
             undecoratorController.restoreFullScreenSavedBounds(stage);
@@ -595,7 +631,7 @@ public class Undecorator extends StackPane {
             maximizeMenuItem.setOnAction(actionEvent->{switchMaximize();contextMenu.hide();});
             contextMenu.getItems().addAll(maximizeMenuItem, new SeparatorMenuItem());
         }
-
+        
         // Fullscreen
         if (stageStyle != StageStyle.UTILITY && stage.isResizable()) {
             fullScreenMenuItem.setText(LOC.getString("FullScreen"));

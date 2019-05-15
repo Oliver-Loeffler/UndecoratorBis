@@ -51,7 +51,7 @@ class WxFlatThemeTest {
 		Properties props = classUnderTest.loadAndGetProperties();
 		assertNotNull(props);
 		
-		assertTrue(classUnderTest.fullscreenEnabled());
+		assertFalse(classUnderTest.fullscreenEnabled());
 	}
 	
 	void assertThat(String resourceName, URL source) {

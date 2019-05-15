@@ -88,6 +88,18 @@
 /*
 *	Menu button
 */
+.decoration-icon-menu {
+    -fx-background-color: white;
+    -size: 24;
+
+    -fx-min-height: -size;
+    -fx-min-width: -size;
+    -fx-max-height: -size;
+    -fx-max-width: -size;
+    
+    -fx-shape: "M2,3H11V12H2V3M11,22H2V13H11V22M21,3V12H12V3H21M21,22H12V13H21V22Z";
+}
+
 .decoration-button-menu{
     -fx-background-radius: 0;
     -fx-background-insets: 0 0 -1 0;
@@ -104,9 +116,6 @@
     -fx-background-color: -wxflat-hover-color;
 }
 
-.decoration-glyph-menu {
-    -glyph-name: MICROSOFT;
-}
 
 /*
 *	Minimize button
@@ -127,10 +136,6 @@
     -fx-background-color: -wxflat-hover-color;
 }
 
-.decoration-glyph-minimize {
-    -glyph-name: WINDOW_MINIMIZE;
-}
-
 /*
 *	Maximize button
 */
@@ -148,10 +153,6 @@
     -fx-background-color: -wxflat-hover-color;
 }
 
-.decoration-glyph-maximize {
-    -glyph-name: WINDOW_MAXIMIZE;
-}
-
 .decoration-button-restore{
     -fx-background-radius: 0;
     -fx-border-style: none;
@@ -165,9 +166,6 @@
     -fx-background-insets: 0 0 -1 0;
 }
 
-.decoration-glyph-restore {
-    -glyph-name: WINDOW_RESTORE;
-}
 
 /*
  * Title bar
@@ -216,6 +214,70 @@
 /*
 *	Fullscreen button
 */
+
+.decoration-icon-fullscreen {
+    -fx-background-color: white;
+    -size: 24;
+
+    -fx-min-height: -size;
+    -fx-min-width: -size;
+    -fx-max-height: -size;
+    -fx-max-width: -size;
+
+    -fx-shape: "M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z";
+}
+
+.decoration-icon-minimize {
+    -fx-background-color: white;
+    -size: 24;
+
+    -fx-min-height: -size;
+    -fx-min-width: -size;
+    -fx-max-height: -size;
+    -fx-max-width: -size;
+
+    -fx-shape: "M20,14H4V10H20";
+}
+
+.decoration-icon-maximize {
+    -fx-background-color: white;
+    -size: 24;
+
+    -fx-min-height: -size;
+    -fx-min-width: -size;
+    -fx-max-height: -size;
+    -fx-max-width: -size;
+
+    -fx-shape: "M4,4H20V20H4V4M6,8V18H18V8H6Z";
+}
+
+.decoration-icon-close {
+    -fx-background-color: white;
+    -size: 24;
+
+    -fx-min-height: -size;
+    -fx-min-width: -size;
+    -fx-max-height: -size;
+    -fx-max-width: -size;
+
+    -fx-shape: "M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z";
+}
+
+.decoration-icon-resize-lower-right {
+    -fx-background-color: #8e8197;
+    -size: 24;
+
+    -fx-min-height: -size;
+    -fx-min-width: -size;
+    -fx-max-height: -size;
+    -fx-max-width: -size;
+    
+    -fx-translate-x: -2;
+    -fx-translate-y: -2;
+    
+    -fx-shape: "M22,22H20V20H22V22M22,18H20V16H22V18M18,22H16V20H18V22M18,18H16V16H18V18M14,22H12V20H14V22M22,14H20V12H22V14Z";
+}
+
 .decoration-button-fullscreen{
     -fx-background-radius: 0;
     -fx-border-style: none;
@@ -226,22 +288,9 @@
     -fx-background-color: -wxflat-hover-color;
 }
 
-.decoration-glyph-fullscreen {
-    -glyph-name: FULLSCREEN;
-}
-
-.decoration-button-unfullscreen{
-    -fx-background-radius: 0;
-    -fx-border-style: none;
-    -fx-background-color: transparent;
-}
 
 .decoration-button-unfullscreen:hover{
     -fx-background-color: -wxflat-hover-color;
-}
-
-.decoration-glyph-unfullscreen {
-    -glyph-name: FULLSCREEN_EXIT;
 }
 
 /*

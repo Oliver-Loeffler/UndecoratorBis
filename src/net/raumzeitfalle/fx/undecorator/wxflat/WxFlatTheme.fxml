@@ -30,8 +30,6 @@
 
 -->
 
-
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -39,35 +37,35 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.layout.Region?>
 
-<AnchorPane id="decorationRoot" fx:id="decorationRoot" pickOnBounds="false" prefHeight="400.0" prefWidth="600.0" styleClass="decoration-resize" xmlns="http://javafx.com/javafx/8.5" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="decorationRoot" fx:id="decorationRoot" pickOnBounds="false" prefHeight="400.0" prefWidth="600.0" styleClass="decoration-resize" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="resize" focusTraversable="false" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" minHeight="22.0" minWidth="22.0" mnemonicParsing="false" mouseTransparent="true" pickOnBounds="true" prefHeight="22.0" prefWidth="22.0" styleClass="decoration-button-resize" text="" AnchorPane.bottomAnchor="-5.0" AnchorPane.rightAnchor="-5.0">
-         <graphic>
-            <SVGPath content="M22,22H20V20H22V22M22,18H20V16H22V18M18,22H16V20H18V22M18,18H16V16H18V18M14,22H12V20H14V22M22,14H20V12H22V14Z" fill="#8e8197" styleClass="decoration-glyph-resize"/>
-         </graphic>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
+         <graphic>
+            <Region centerShape="false" scaleShape="false" styleClass="decoration-icon-resize-lower-right" translateX="-5.0" translateY="-5.0" />
+         </graphic>
       </Button>
       <AnchorPane fx:id="topDecorationAnchor" maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" pickOnBounds="false" snapToPixel="true" styleClass="decoration-topbar" AnchorPane.leftAnchor="-7.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="-7.0">
         <children>
-            <HBox alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+            <HBox alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" scaleShape="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
                <children>
-                  <Button fx:id="menu" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" minHeight="32.0" mnemonicParsing="false" pickOnBounds="true" prefHeight="32.0" styleClass="decoration-button-menu" text="">
+                  <Button fx:id="menu" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" minHeight="32.0" mnemonicParsing="false" pickOnBounds="true" prefHeight="32.0" styleClass="decoration-button-menu" text="" HBox.hgrow="NEVER">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
-                     <graphic>
-                        <SVGPath content="M2,3H11V12H2V3M11,22H2V13H11V22M21,3V12H12V3H21M21,22H12V13H21V22ZM2,3H11V12H2V3M11,22H2V13H11V22M21,3V12H12V3H21M21,22H12V13H21V22Z" fill="WHITE" styleClass="decoration-glyph-menu"/>
-                     </graphic>
                      <contextMenu>
                         <ContextMenu fx:id="contextMenu" />
                      </contextMenu>
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
+                     <graphic>
+                        <Region centerShape="false" prefHeight="200.0" prefWidth="200.0" scaleShape="false" styleClass="decoration-icon-menu" />
+                     </graphic>
                   </Button>
                   <AnchorPane fx:id="titleanchor" maxHeight="30.0" maxWidth="1.7976931348623157E308" pickOnBounds="false" prefHeight="30.0" prefWidth="427.0" styleClass="decoration-titlebar" HBox.hgrow="ALWAYS">
                      <children>
@@ -77,49 +75,48 @@
                         <Insets />
                      </HBox.margin>
                   </AnchorPane>
-                <Button fx:id="fullscreen" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" graphicTextGap="0.0" maxHeight="32.0" minHeight="32.0" mnemonicParsing="false" pickOnBounds="true" prefHeight="32.0" styleClass="decoration-button-fullscreen" text="" HBox.hgrow="NEVER">
+                <Button fx:id="fullscreen" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" graphicTextGap="0.0" maxHeight="32.0" minHeight="32.0" mnemonicParsing="false" pickOnBounds="true" prefHeight="32.0" style="-fx-background-color: red;" styleClass="decoration-button-fullscreen" text="" HBox.hgrow="NEVER">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
-                     <graphic>
-                        <SVGPath content="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10ZM5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" fill="WHITE" styleClass="decoration-glyph-fullscreen"/>
-                     </graphic>
                      <padding>
                         <Insets left="5.0" right="5.0" />
                      </padding>
+                     <graphic>
+                        <Region fx:id="fullscreenButtonRegion" centerShape="false" scaleShape="false" styleClass="decoration-icon-fullscreen">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </Region>
+                     </graphic>
                   </Button>
-                <Button fx:id="minimize" contentDisplay="GRAPHIC_ONLY" maxHeight="32.0" minHeight="32.0" mnemonicParsing="false" pickOnBounds="true" prefHeight="32.0" styleClass="decoration-button-minimize" text="">
+                <Button fx:id="minimize" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="32.0" minHeight="32.0" mnemonicParsing="false" pickOnBounds="true" prefHeight="32.0" styleClass="decoration-button-minimize" text="">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
                      <graphic>
-                        <SVGPath content="M20,14H4V10H20M20,14H4V10H20" fill="WHITE" styleClass="decoration-glyph-minimize"/>
+                        <Region fx:id="minimizeButtonRegion" centerShape="false" scaleShape="false" styleClass="decoration-icon-minimize" />
                      </graphic>
                   </Button>
-                <Button fx:id="maximize" contentDisplay="GRAPHIC_ONLY" maxHeight="32.0" minHeight="32.0" mnemonicParsing="false" pickOnBounds="true" prefHeight="32.0" styleClass="decoration-button-maximize" text="" textFill="WHITE">
+                <Button fx:id="maximize" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="32.0" maxWidth="26.0" minHeight="32.0" mnemonicParsing="false" pickOnBounds="true" prefHeight="32.0" prefWidth="26.0" styleClass="decoration-button-maximize" text="" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
-                     <graphic>
-                        <SVGPath content="M4,4H20V20H4V4M6,8V18H18V8H6ZM4,4H20V20H4V4M6,8V18H18V8H6Z" fill="WHITE" styleClass="decoration-glyph-maximize"/>
-                     </graphic>
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
+                     <graphic>
+                        <Region fx:id="maximizeButtonRegion" scaleShape="false" styleClass="decoration-icon-maximize" />
+                     </graphic>
                   </Button>
                   <HBox styleClass="decoration-box-close" HBox.hgrow="NEVER">
                      <children>
-                      <Button fx:id="close" contentDisplay="GRAPHIC_ONLY" maxHeight="32.0" minHeight="32.0" mnemonicParsing="false" pickOnBounds="true" prefHeight="32.0" styleClass="decoration-button-close" text="">
+                      <Button fx:id="close" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="32.0" minHeight="32.0" mnemonicParsing="false" pickOnBounds="true" prefHeight="32.0" styleClass="decoration-button-close" text="" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="DEFAULT" />
                            </cursor>
                            <graphic>
-                              <SVGPath fill="WHITE" content="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z">
-                                 <styleClass>
-                                    <String fx:value="decoration-glyph-close" />
-                                    <String fx:value="decoration-button-close" />
-                                 </styleClass>
-                              </SVGPath>
+                              <Region fx:id="closeButtonRegion" centerShape="false" scaleShape="false" styleClass="decoration-icon-close" stylesheets="@WxFlatTheme.css" />
                            </graphic>
                       </Button>
                      </children>
